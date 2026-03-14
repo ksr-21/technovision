@@ -51,13 +51,19 @@ export default function Departments() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
-                whileHover={{ y: -10 }}
-                className={`relative h-full p-8 rounded-[2.5rem] border border-white/10 bg-zinc-900/40 backdrop-blur-xl transition-all duration-500 overflow-hidden group-hover:border-white/20`}
+                whileHover={{
+                  y: -10,
+                  rotateX: 5,
+                  rotateY: 5,
+                  transition: { duration: 0.3 }
+                }}
+                className={`relative h-full p-8 rounded-[2.5rem] border border-white/10 bg-zinc-900/40 backdrop-blur-xl transition-all duration-500 overflow-hidden group-hover:border-white/20 group-hover:shadow-2xl group-hover:shadow-current/10`}
+                style={{ transformStyle: 'preserve-3d' }}
               >
                 {/* Accent Glow */}
-                <div className={`absolute -right-10 -top-10 w-32 h-32 rounded-full blur-[60px] opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${dept.accent}`} />
+                <div className={`absolute -right-10 -top-10 w-32 h-32 rounded-full blur-[60px] opacity-0 group-hover:opacity-40 transition-opacity duration-500 ${dept.accent}`} />
                 
-                <div className="relative z-10">
+                <div className="relative z-10" style={{ transform: 'translateZ(20px)' }}>
                   <div className={`w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
                     <dept.icon className={`w-7 h-7 ${dept.color}`} />
                   </div>
