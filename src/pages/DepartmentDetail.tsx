@@ -198,239 +198,149 @@ const ThematicBackground = ({ deptId }: { deptId: string }) => {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px]" />
 
       {/* Department Specific Immersive Elements */}
+      {deptId === 'aids' && (
+        <div className="absolute inset-0 opacity-10 flex items-center justify-center">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          >
+            <Brain size={500} className="text-emerald-500" strokeWidth={0.2}/>
+          </motion.div>
+
+          <motion.div
+            className="absolute top-20 left-20 text-emerald-400"
+            animate={{ y: [0, 40, 0] }}
+            transition={{ duration: 6, repeat: Infinity }}
+          >
+            <Cpu size={200} strokeWidth={0.3}/>
+          </motion.div>
+
+          <motion.div
+            className="absolute bottom-20 right-20 text-emerald-400"
+            animate={{ y: [0, -40, 0] }}
+            transition={{ duration: 6, repeat: Infinity }}
+          >
+            <Network size={200} strokeWidth={0.3}/>
+          </motion.div>
+        </div>
+      )}
+
       {deptId === 'computer' && (
-        <div className="absolute inset-0 opacity-10 font-mono text-[10px] leading-none select-none overflow-hidden flex flex-wrap gap-4 p-4">
-          {[...Array(30)].map((_, i) => (
+        <div className="absolute inset-0 opacity-20 font-mono text-green-400 text-xs overflow-hidden">
+          {[...Array(40)].map((_, i) => (
             <motion.div
               key={i}
-              initial={{ y: -100, opacity: 0 }}
-              animate={{ y: 1000, opacity: [0, 1, 0] }}
-              transition={{ duration: 4 + Math.random() * 8, repeat: Infinity, delay: Math.random() * 5 }}
-              className={`${i % 2 === 0 ? 'text-blue-500' : 'text-cyan-400'} whitespace-pre`}
+              initial={{ y: -100 }}
+              animate={{ y: "120vh" }}
+              transition={{
+                duration: 6 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 5
+              }}
+              className="absolute"
+              style={{ left: `${Math.random()*100}%` }}
             >
-              {`// SYSTEM_BOOT\nconst core = 0x${Math.random().toString(16).slice(2, 6)};\nif (core > 0x${Math.random().toString(16).slice(2, 4)}) {\n  execute(core);\n}\n`.repeat(8)}
+              {`{ code(); } <div> </div> function() => 0xAF`}
             </motion.div>
           ))}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent animate-pulse" />
-        </div>
-      )}
-
-      {deptId === 'aids' && (
-        <div className="absolute inset-0 opacity-20">
-          <svg width="100%" height="100%" className="absolute inset-0">
-            <defs>
-              <radialGradient id="nodeGradient" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#10b981" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
-              </radialGradient>
-            </defs>
-            {[...Array(25)].map((_, i) => (
-              <motion.circle
-                key={i}
-                cx={`${Math.random() * 100}%`}
-                cy={`${Math.random() * 100}%`}
-                r={Math.random() * 5 + 2}
-                fill="url(#nodeGradient)"
-                animate={{ 
-                  opacity: [0.2, 0.8, 0.2], 
-                  scale: [1, 1.8, 1],
-                  cx: [`${Math.random() * 100}%`, `${Math.random() * 100}%`]
-                }}
-                transition={{ duration: 5 + Math.random() * 5, repeat: Infinity }}
-              />
-            ))}
-            {[...Array(15)].map((_, i) => (
-              <motion.line
-                key={i}
-                x1={`${Math.random() * 100}%`}
-                y1={`${Math.random() * 100}%`}
-                x2={`${Math.random() * 100}%`}
-                y2={`${Math.random() * 100}%`}
-                stroke="currentColor"
-                strokeWidth="0.8"
-                className="text-emerald-500/20"
-                animate={{ opacity: [0.1, 0.5, 0.1] }}
-                transition={{ duration: 6 + Math.random() * 4, repeat: Infinity }}
-              />
-            ))}
-          </svg>
-          <div className="absolute top-1/4 right-1/4 opacity-10 animate-pulse">
-            <Brain size={300} strokeWidth={0.1} className="text-emerald-500" />
-          </div>
-        </div>
-      )}
-
-      {deptId === 'civil' && (
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_48%,#f97316_49%,#f97316_51%,transparent_52%)] bg-[size:100px_100px]" />
-          <div className="absolute inset-0 border-[2px] border-orange-500/10 m-10" />
-          <div className="absolute inset-0 border-[2px] border-orange-500/10 m-20" />
-          {[...Array(8)].map((_, i) => (
-            <div key={i} className="absolute border-t border-orange-500/20 w-full flex justify-between px-4" style={{ top: `${12.5 * i}%` }}>
-              <span className="text-[8px] text-orange-500/40 font-mono">X_AXIS_REF_{i}00</span>
-              <span className="text-[8px] text-orange-500/40 font-mono">Y_AXIS_REF_{i}00</span>
-            </div>
-          ))}
-          <div className="absolute bottom-10 right-10 opacity-20">
-            <Ruler size={200} strokeWidth={0.2} className="text-orange-500 rotate-45" />
-          </div>
         </div>
       )}
 
       {deptId === 'mech' && (
         <div className="absolute inset-0 opacity-10">
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute text-red-500"
-              style={{ 
-                left: `${(i % 3) * 30 + 5}%`, 
-                top: `${Math.floor(i / 3) * 30 + 5}%` 
-              }}
-              animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
-              transition={{ duration: 15 + i * 2, repeat: Infinity, ease: "linear" }}
-            >
-              <Settings size={120 + i * 40} strokeWidth={0.1} />
-            </motion.div>
-          ))}
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,rgba(239,68,68,0.05)_100%)]" />
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="absolute left-10 top-20 text-red-500"
+          >
+            <Settings size={300} strokeWidth={0.2}/>
+          </motion.div>
+
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            className="absolute right-20 bottom-20 text-red-500"
+          >
+            <Settings size={250} strokeWidth={0.2}/>
+          </motion.div>
+
+          <motion.div
+            animate={{ x: [-200, 1200] }}
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-10 text-red-400"
+          >
+            🚗
+          </motion.div>
+        </div>
+      )}
+
+      {deptId === 'civil' && (
+        <div className="absolute inset-0 opacity-10 flex items-end justify-center">
+          <Building size={500} strokeWidth={0.15} className="text-orange-500"/>
+          <motion.div
+            className="absolute bottom-0 w-full h-32 border-t border-orange-400"
+            animate={{ opacity: [0.3,0.6,0.3] }}
+            transition={{ duration: 4, repeat: Infinity }}
+          />
         </div>
       )}
 
       {deptId === 'etc' && (
         <div className="absolute inset-0 opacity-10">
-          <svg width="100%" height="100%">
-            <pattern id="circuit" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
-              <path d="M0 100h50v50h50v-100h50v50h50" fill="none" stroke="#eab308" strokeWidth="1" />
-              <circle cx="50" cy="100" r="3" fill="#eab308" />
-              <circle cx="100" cy="150" r="3" fill="#eab308" />
-              <circle cx="150" cy="50" r="3" fill="#eab308" />
-              <motion.circle
-                cx="50" cy="100" r="5"
-                fill="#eab308"
-                animate={{ opacity: [0.2, 1, 0.2] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            </pattern>
-            <rect width="100%" height="100%" fill="url(#circuit)" />
-          </svg>
-          {[...Array(5)].map((_, i) => (
+          <Cpu size={400} className="absolute left-20 top-20 text-yellow-400"/>
+          {[...Array(10)].map((_,i)=>(
             <motion.div
               key={i}
-              className="absolute h-px bg-yellow-500/30"
-              style={{ 
-                top: `${20 * i}%`, 
-                left: 0, 
-                right: 0,
-                boxShadow: '0 0 10px #eab308'
-              }}
-              animate={{ x: ['-100%', '100%'] }}
-              transition={{ duration: 3 + i, repeat: Infinity, ease: "linear" }}
+              className="absolute h-[2px] bg-yellow-400"
+              style={{ top:`${10*i}%`, width:"100%" }}
+              animate={{ x:["-100%","100%"] }}
+              transition={{ duration:4+i, repeat:Infinity }}
             />
           ))}
         </div>
       )}
 
-      {deptId === 'fe' && (
-        <div className="absolute inset-0 opacity-10">
-          <svg width="100%" height="100%">
-            <pattern id="science" x="0" y="0" width="150" height="150" patternUnits="userSpaceOnUse">
-              <circle cx="75" cy="75" r="25" fill="none" stroke="#ec4899" strokeWidth="0.3" />
-              <ellipse cx="75" cy="75" rx="40" ry="15" fill="none" stroke="#ec4899" strokeWidth="0.3" transform="rotate(45 75 75)" />
-              <ellipse cx="75" cy="75" rx="40" ry="15" fill="none" stroke="#ec4899" strokeWidth="0.3" transform="rotate(-45 75 75)" />
-              <motion.circle
-                cx="75" cy="75" r="3"
-                fill="#ec4899"
-                animate={{ scale: [1, 2, 1], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            </pattern>
-            <rect width="100%" height="100%" fill="url(#science)" />
-          </svg>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20">
-            <Atom size={400} strokeWidth={0.05} className="text-pink-500 animate-spin-slow" />
-          </div>
+      {deptId === 'mba' && (
+        <div className="absolute inset-0 opacity-10 flex items-center justify-center">
+          <TrendingUp size={500} strokeWidth={0.15} className="text-purple-400"/>
+          <motion.div
+            className="absolute bottom-20 left-20 text-purple-400"
+            animate={{ y:[0,-40,0] }}
+            transition={{ duration:4, repeat:Infinity }}
+          >
+            <Globe size={200}/>
+          </motion.div>
         </div>
       )}
 
-      {deptId === 'mba' && (
-        <div className="absolute inset-0 opacity-10">
-          <svg width="100%" height="100%" viewBox="0 0 1600 800" preserveAspectRatio="none">
-            <motion.path
-              d="M0 600 Q 200 400 400 500 T 800 300 T 1200 400 T 1600 200"
-              fill="none"
-              stroke="#a855f7"
-              strokeWidth="3"
-              animate={{ d: [
-                "M0 600 Q 200 400 400 500 T 800 300 T 1200 400 T 1600 200",
-                "M0 600 Q 200 500 400 400 T 800 400 T 1200 300 T 1600 300"
-              ]}}
-              transition={{ duration: 6, repeat: Infinity, repeatType: "reverse" }}
-            />
-            <motion.path
-              d="M0 700 Q 300 500 600 600 T 1000 400 T 1600 500"
-              fill="none"
-              stroke="#a855f7"
-              strokeWidth="1"
-              strokeDasharray="10 10"
-              animate={{ opacity: [0.2, 0.5, 0.2] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            />
-          </svg>
-          <div className="absolute top-10 left-10 font-mono text-[8px] text-purple-500/30 uppercase tracking-widest">
-            Market_Analysis_v2.0<br/>Growth_Projection_Active
-          </div>
+      {deptId === 'fe' && (
+        <div className="absolute inset-0 flex items-center justify-center opacity-10">
+          <motion.div
+            animate={{ rotate:360 }}
+            transition={{ duration:20, repeat:Infinity, ease:"linear" }}
+          >
+            <Atom size={500} strokeWidth={0.2} className="text-pink-400"/>
+          </motion.div>
+          <Lightbulb size={200} className="absolute top-20 right-20 text-pink-300"/>
         </div>
       )}
 
       {deptId === 'mca' && (
         <div className="absolute inset-0 opacity-10">
-          <div className="grid grid-cols-4 md:grid-cols-8 gap-4 p-10">
-            {[...Array(32)].map((_, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0.1, 0.3, 0.1] }}
-                transition={{ duration: 3, delay: i * 0.1, repeat: Infinity }}
-                className="h-24 border border-indigo-500/20 rounded-xl flex flex-col items-center justify-center font-mono text-[7px] text-indigo-500/40 bg-indigo-500/5"
-              >
-                <Database size={12} className="mb-1" />
-                TABLE_{i}<br/>ID: UUID<br/>VAL: BLOB
-              </motion.div>
-            ))}
-          </div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(79,70,229,0.1)_0%,transparent_50%)]" />
+          <Database size={400} className="absolute left-20 bottom-20 text-indigo-400"/>
+          {[...Array(12)].map((_,i)=>(
+            <motion.div
+              key={i}
+              className="absolute text-indigo-400 text-xs font-mono"
+              style={{ top:`${i*8}%`, left:`${Math.random()*80}%` }}
+              animate={{ opacity:[0.2,1,0.2] }}
+              transition={{ duration:3, repeat:Infinity }}
+            >
+              SELECT * FROM USERS;
+            </motion.div>
+          ))}
         </div>
       )}
-
-      {/* Floating Icons Overlay */}
-      {[...Array(8)].map((_, i) => {
-        const Icon = dept.bgElements[i % dept.bgElements.length];
-        return (
-          <motion.div
-            key={i}
-            initial={{ 
-              opacity: 0, 
-              x: Math.random() * 100 + "%", 
-              y: Math.random() * 100 + "%",
-              scale: 0.5
-            }}
-            animate={{ 
-              opacity: [0.03, 0.1, 0.03],
-              y: [null, "-=50", "+=50"],
-              rotate: 360
-            }}
-            transition={{ 
-              duration: 15 + Math.random() * 10, 
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className={`absolute ${dept.textColor}`}
-          >
-            <Icon size={100} strokeWidth={0.3} />
-          </motion.div>
-        );
-      })}
 
       {/* Radial Glow */}
       <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full blur-[180px] opacity-10 bg-current ${dept.textColor}`} />
