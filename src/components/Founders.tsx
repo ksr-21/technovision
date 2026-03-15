@@ -21,13 +21,13 @@ export default function Founders() {
             transition={{ duration: 0.8 }}
             className="text-center md:text-left order-2 md:order-1"
           >
-            <div className="inline-block px-4 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] uppercase tracking-[0.2em] mb-8">
-              Founder Secretary, JSPM & TSSM
+            <div className="inline-block px-4 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] uppercase tracking-[0.2em] mb-8 text-center md:text-left">
+              Founder Secretary, JSPM & President, TSSM
             </div>
             
-            <h3 className="text-5xl md:text-7xl font-black text-white tracking-tighter mb-8 leading-none">
-              Hon. Prof. <br />
-              <span className="text-emerald-500">T. J. Sawant</span>
+            <h3 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-8 leading-tight">
+              Hon. Prof. Dr. <br />
+              <span className="text-emerald-500">T. J. Sawant Sir</span>
             </h3>
             
             <div className="space-y-6 mb-12">
@@ -36,7 +36,7 @@ export default function Founders() {
               </p>
               <p className="text-gray-400 text-lg leading-relaxed font-light">
                 A visionary educationist and a pioneer in the field of technical education in Maharashtra. 
-                As the Founder Secretary of JSPM and TSSM, Hon. Prof. T. J. Sawant has dedicated his life 
+                As the Founder Secretary of JSPM and President of TSSM, Hon. Prof. Dr. T. J. Sawant Sir has dedicated his life
                 to creating world-class educational infrastructure. His unwavering commitment to excellence 
                 has empowered thousands of young minds to achieve their professional dreams through 
                 quality education and innovative learning environments.
@@ -75,7 +75,7 @@ export default function Founders() {
               <div className="relative bg-zinc-900 border border-white/10 rounded-full p-2">
                 <img 
                   src="https://jspmntc.edu.in/storage/Menus/ListMenu/3/1632652215TJSawant.jpeg" 
-                  alt="Hon. Prof. T. J. Sawant" 
+                  alt="Hon. Prof. Dr. T. J. Sawant Sir"
                   className="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
