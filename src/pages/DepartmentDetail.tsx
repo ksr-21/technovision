@@ -1,9 +1,7 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { Phone, Mail, Trophy, ArrowLeft, User } from 'lucide-react';
+import { Phone, Mail, Trophy, User } from 'lucide-react';
 import { departments } from '../data/departments';
 
 const ThematicBackground = ({ deptId }: { deptId: string }) => {
@@ -80,21 +78,11 @@ export default function DepartmentDetail() {
 
   return (
     <div className="min-h-screen bg-zinc-950 relative selection:bg-white/10">
-      <Header />
-      
       <main className="py-24 px-6 relative">
         {/* Department Specific Background */}
         <ThematicBackground deptId={dept.id} />
 
         <div className="max-w-6xl mx-auto relative z-10">
-          <Link 
-            to="/" 
-            className="inline-flex items-center gap-2 text-white/40 hover:text-white transition-colors mb-12 group"
-          >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span className="text-xs uppercase tracking-[0.3em] font-mono">Back to Hub</span>
-          </Link>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Hero Card */}
             <motion.div
@@ -231,8 +219,6 @@ export default function DepartmentDetail() {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }
