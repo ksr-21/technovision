@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Globe } from 'lucide-react';
+import { Mail, Phone, MapPin, Globe, Linkedin, Instagram } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -45,6 +45,28 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <span className="text-white font-serif text-xl italic">JSPM.</span>
             <span className="text-white/20 text-xs uppercase tracking-widest">© 2026</span>
+          </div>
+          <div className="flex items-center gap-6 text-white/20 text-[10px] uppercase tracking-[0.4em]">
+            <div className="flex items-center gap-2">
+              <span>Made by</span>
+              <a
+                href="https://www.linkedin.com/feed/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors flex items-center gap-1.5"
+              >
+                Kunal Sanjit Singh
+                <Linkedin size={10} className="mb-0.5" />
+              </a>
+              <a
+                href="https://www.instagram.com/kunalsinghrajput_21?igsh=b21objl3dXprZHA2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                <Instagram size={10} className="mb-0.5" />
+              </a>
+            </div>
           </div>
           <div className="text-white/20 text-[10px] uppercase tracking-[0.4em]">
             Narhe Technical Campus • Pune • India
