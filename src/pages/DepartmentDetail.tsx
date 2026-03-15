@@ -88,15 +88,25 @@ export default function DepartmentDetail() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`lg:col-span-8 relative p-8 md:p-16 rounded-[3rem] border ${dept.borderColor} bg-zinc-950/60 backdrop-blur-3xl overflow-hidden group shadow-2xl shadow-current/5`}
+              className={`lg:col-span-8 relative rounded-[3rem] border ${dept.borderColor} bg-zinc-950/60 backdrop-blur-3xl overflow-hidden group shadow-2xl shadow-current/5`}
             >
-              <div className="relative z-10">
-                <div className="flex items-center gap-6 mb-10">
+              {/* Event Image Banner */}
+              <div className="relative h-64 md:h-80 overflow-hidden">
+                <img
+                  src={dept.eventImage}
+                  alt={dept.eventName}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+              </div>
+
+              <div className="relative z-10 p-8 md:p-16 -mt-32">
+                <div className="flex flex-col md:flex-row md:items-center gap-6 mb-10">
                   <motion.div 
                     whileHover={{ rotate: 15, scale: 1.1 }}
-                    className={`p-5 rounded-[2rem] bg-white/5 border ${dept.borderColor} shadow-2xl shadow-current/10`}
+                    className={`w-20 h-20 rounded-[2rem] bg-zinc-900 border ${dept.borderColor} shadow-2xl shadow-current/10 flex items-center justify-center`}
                   >
-                    <dept.icon className={`w-12 h-12 ${dept.textColor}`} />
+                    <dept.icon className={`w-10 h-10 ${dept.textColor}`} />
                   </motion.div>
                   <div>
                     <motion.p 

@@ -1,18 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Brain, Code, Zap, Building, Briefcase, Terminal, Settings, BookOpen, ArrowRight } from 'lucide-react';
-
-const departments = [
-  { id: 'aids', name: 'AI & DS', fullName: 'AI & Data Science', icon: Brain, color: 'text-emerald-400', borderColor: 'hover:border-emerald-500/50', accent: 'bg-emerald-500/10' },
-  { id: 'civil', name: 'Civil', fullName: 'Civil Engineering', icon: Building, color: 'text-orange-400', borderColor: 'hover:border-orange-500/50', accent: 'bg-orange-500/10' },
-  { id: 'computer', name: 'Computer', fullName: 'Computer Engineering', icon: Code, color: 'text-blue-400', borderColor: 'hover:border-blue-500/50', accent: 'bg-blue-500/10' },
-  { id: 'etc', name: 'E&TC', fullName: 'Electronics & Telecomm', icon: Zap, color: 'text-yellow-400', borderColor: 'hover:border-yellow-500/50', accent: 'bg-yellow-500/10' },
-  { id: 'fe', name: 'FE', fullName: 'First Year Engineering', icon: BookOpen, color: 'text-pink-400', borderColor: 'hover:border-pink-500/50', accent: 'bg-pink-500/10' },
-  { id: 'mba', name: 'MBA', fullName: 'Business Administration', icon: Briefcase, color: 'text-purple-400', borderColor: 'hover:border-purple-500/50', accent: 'bg-purple-500/10' },
-  { id: 'mca', name: 'MCA', fullName: 'Computer Applications', icon: Terminal, color: 'text-indigo-400', borderColor: 'hover:border-indigo-500/50', accent: 'bg-indigo-500/10' },
-  { id: 'mech', name: 'Mech', fullName: 'Mechanical Engineering', icon: Settings, color: 'text-red-400', borderColor: 'hover:border-red-500/50', accent: 'bg-red-500/10' },
-];
+import { ArrowRight } from 'lucide-react';
+import { departments } from '../data/departments';
 
 export default function Departments() {
   return (
@@ -53,35 +43,50 @@ export default function Departments() {
                 transition={{ delay: index * 0.05 }}
                 whileHover={{
                   y: -10,
-                  rotateX: 5,
-                  rotateY: 5,
                   transition: { duration: 0.3 }
                 }}
-                className={`relative h-full p-8 rounded-[2.5rem] border border-white/10 bg-zinc-900/40 backdrop-blur-xl transition-all duration-500 overflow-hidden group-hover:border-white/20 group-hover:shadow-2xl group-hover:shadow-current/10`}
-                style={{ transformStyle: 'preserve-3d' }}
+                className={`relative h-full rounded-[2.5rem] border border-white/10 bg-zinc-900/40 backdrop-blur-xl transition-all duration-500 overflow-hidden group-hover:border-white/20 group-hover:shadow-2xl group-hover:shadow-current/10`}
               >
-                {/* Accent Glow */}
-                <div className={`absolute -right-10 -top-10 w-32 h-32 rounded-full blur-[60px] opacity-0 group-hover:opacity-40 transition-opacity duration-500 ${dept.accent}`} />
-                
-                <div className="relative z-10" style={{ transform: 'translateZ(20px)' }}>
-                  <div className={`w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
-                    <dept.icon className={`w-7 h-7 ${dept.color}`} />
+                {/* Event Image Header */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={dept.eventImage}
+                    alt={dept.eventName}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-zinc-900/20 to-transparent" />
+
+                  {/* Department Icon Overlay */}
+                  <div className={`absolute bottom-4 left-6 w-12 h-12 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-xl`}>
+                    <dept.icon className={`w-6 h-6 ${dept.textColor}`} />
                   </div>
-                  
-                  <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">{dept.name}</h3>
-                  <p className="text-xs text-white/40 font-mono uppercase tracking-widest mb-8 leading-relaxed">
-                    {dept.fullName}
+                </div>
+
+                {/* Content */}
+                <div className="p-8 pt-6 relative z-10">
+                  <div className={`absolute -right-10 -top-10 w-32 h-32 rounded-full blur-[60px] opacity-0 group-hover:opacity-40 transition-opacity duration-500 ${dept.accentBg}`} />
+
+                  <h3 className="text-xl font-bold text-white mb-1 tracking-tight group-hover:text-white transition-colors">
+                    {dept.eventName}
+                  </h3>
+
+                  <p className={`text-[10px] font-mono uppercase tracking-[0.2em] mb-4 ${dept.textColor}`}>
+                    {dept.name}
                   </p>
                   
-                  <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-all duration-300">
+                  <p className="text-sm text-white/40 mb-8 leading-relaxed line-clamp-2 group-hover:text-white/60 transition-colors">
+                    {dept.shortEventDescription}
+                  </p>
+                  
+                  <div className="flex items-center gap-2 text-white/20 group-hover:text-white transition-all duration-300">
                     <span className="text-[10px] font-mono uppercase tracking-[0.2em]">Explore Event</span>
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
 
-                {/* Decorative Icon Background */}
-                <div className="absolute -bottom-4 -right-4 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500">
-                  <dept.icon size={120} strokeWidth={1} className={dept.color} />
+                {/* Decorative Background Icon */}
+                <div className="absolute -bottom-4 -right-4 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none">
+                  <dept.icon size={120} strokeWidth={1} className={dept.textColor} />
                 </div>
               </motion.div>
             </Link>
