@@ -3,19 +3,28 @@ import { motion } from 'motion/react';
 
 const leaders = [
   {
-    name: 'Dr. R. K. Lad',
-    designation: 'Director',
-    image: 'https://picsum.photos/seed/director/300/300',
+    name: 'Hon. Mr. Rushiraj T. Sawant',
+    designation: 'Trustee JSPM & TSSM',
   },
   {
-    name: 'Dr. S. S. Deshpande',
-    designation: 'Deputy Director',
-    image: 'https://picsum.photos/seed/deputy/300/300',
+    name: 'Dr. S. R. Thite',
+    designation: 'Campus Director',
   },
   {
-    name: 'Prof. A. B. Patil',
-    designation: 'Faculty Co-ordinator',
-    image: 'https://picsum.photos/seed/coordinator/300/300',
+    name: 'Dr. S. P. Bhosle',
+    designation: 'Director, JSPM NTC',
+  },
+  {
+    name: 'Dr. M. M. Sardeshmukh',
+    designation: 'Deputy Director, JSPM NTC',
+  },
+  {
+    name: 'Prof. S. P. Naik',
+    designation: 'HOD AI & DS Engg. Event Co-ordinator',
+  },
+  {
+    name: 'Dr. B. B. Khapale',
+    designation: 'HOD Civil Engg. Event Co-ordinator',
   },
 ];
 
@@ -27,29 +36,17 @@ export default function Leadership() {
           Institutional Leadership
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {leaders.map((leader, index) => (
             <motion.div
               key={leader.name}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.2 }}
-              className="flex flex-col items-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="flex flex-col items-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/30 transition-colors text-center"
             >
-              <motion.div 
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                className="relative w-48 h-48 mb-6 cursor-default"
-              >
-                <div className="absolute inset-0 border-2 border-dashed border-emerald-500/30 rounded-full animate-[spin_20s_linear_infinite]" />
-                <img 
-                  src={leader.image} 
-                  alt={leader.name} 
-                  className="w-full h-full rounded-full object-cover border-4 border-white/10"
-                  referrerPolicy="no-referrer"
-                />
-              </motion.div>
-              <h3 className="text-xl font-bold text-white">{leader.name}</h3>
-              <p className="text-emerald-400 font-mono text-sm mt-1 uppercase tracking-wider">
+              <h3 className="text-xl font-bold text-white mb-2">{leader.name}</h3>
+              <p className="text-emerald-400 font-mono text-xs uppercase tracking-wider leading-relaxed">
                 {leader.designation}
               </p>
             </motion.div>

@@ -35,7 +35,18 @@ export default function Home() {
             className="text-center relative z-10"
           >
             <h2 className="text-6xl md:text-8xl font-black text-white tracking-tighter mb-4">
-              TECH<span className="text-emerald-500">FEST</span> 2026
+              TECHNO<motion.span
+                animate={{
+                  color: ['#10b981', '#3b82f6', '#10b981'],
+                  textShadow: [
+                    '0 0 20px rgba(16,185,129,0.3)',
+                    '0 0 40px rgba(59,130,246,0.5)',
+                    '0 0 20px rgba(16,185,129,0.3)'
+                  ]
+                }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="text-emerald-500"
+              >VISION</motion.span> 2026
             </h2>
             <p className="text-xl md:text-2xl text-gray-400 font-light tracking-widest uppercase">
               Innovate • Integrate • Inspire
