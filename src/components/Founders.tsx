@@ -4,7 +4,7 @@ import JSPM from '../accets/JSPM.png';
 
 export default function Founders() {
   return (
-    <section className="py-32 px-6 relative overflow-hidden bg-black/40 backdrop-blur-sm border-y border-white/5">
+    <section id="about" className="py-32 px-6 relative overflow-hidden bg-black/40 backdrop-blur-sm border-y border-white/5">
       <div className="max-w-6xl mx-auto">
         <motion.h2 
           initial={{ opacity: 0, y: 10 }}

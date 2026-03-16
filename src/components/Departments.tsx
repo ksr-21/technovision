@@ -6,7 +6,7 @@ import { departments } from '../data/departments';
 
 export default function Departments() {
   return (
-    <section className="py-24 px-6 bg-zinc-950/50 border-y border-white/5 relative overflow-hidden">
+    <section id="departments" className="py-24 px-6 bg-zinc-950/50 border-y border-white/5 relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
 
