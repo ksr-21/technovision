@@ -30,23 +30,45 @@ const leaders = [
 
 export default function Leadership() {
   return (
-    <section id="leadership" className="py-24 px-6 bg-black/60 border-b border-white/5">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-center text-4xl font-bold text-white mb-16 tracking-tighter">
-          Institutional Leadership
-        </h2>
+    <section id="leadership" className="py-32 px-6 bg-black/60 border-b border-white/5 relative overflow-hidden">
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-neon-cyan/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="flex flex-col items-center mb-20">
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: "80px" }}
+            className="h-1 bg-accent mb-6"
+          />
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-center text-4xl md:text-6xl font-black text-white tracking-tighter uppercase"
+          >
+            Institutional <span className="text-accent">Leadership</span>
+          </motion.h2>
+          <p className="text-gray-500 font-mono text-xs tracking-[0.3em] mt-4 uppercase">Governance & Excellence</p>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {leaders.map((leader, index) => (
             <motion.div
               key={leader.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="flex flex-col items-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-accent/30 transition-colors text-center"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              whileHover={{ y: -5, borderColor: 'var(--accent-color)' }}
+              transition={{ delay: index * 0.05 }}
+              className="group flex flex-col items-center p-10 rounded-xl bg-zinc-950/40 backdrop-blur-md border border-white/5 hover:bg-zinc-900/60 transition-all text-center relative overflow-hidden"
             >
-              <h3 className="text-xl font-bold text-white mb-2">{leader.name}</h3>
-              <p className="text-accent font-mono text-xs uppercase tracking-wider leading-relaxed">
+              {/* Corner Accents */}
+              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-accent/0 group-hover:border-accent/100 transition-colors" />
+              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-accent/0 group-hover:border-accent/100 transition-colors" />
+
+              <h3 className="text-lg font-bold text-white mb-3 group-hover:text-accent transition-colors">{leader.name}</h3>
+              <div className="w-8 h-px bg-white/10 mb-4 group-hover:w-16 group-hover:bg-accent/50 transition-all" />
+              <p className="text-gray-400 font-mono text-[10px] uppercase tracking-wider leading-relaxed">
                 {leader.designation}
               </p>
             </motion.div>

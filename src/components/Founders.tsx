@@ -5,14 +5,21 @@ import JSPM from '../accets/JSPM.png';
 export default function Founders() {
   return (
     <section id="about" className="py-32 px-6 relative overflow-hidden bg-black/40 backdrop-blur-sm border-y border-white/5">
-      <div className="max-w-6xl mx-auto">
-        <motion.h2 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-xs uppercase tracking-[0.4em] text-accent mb-20 font-mono text-center md:text-left"
+      {/* HUD Decorative Elements */}
+      <div className="absolute top-10 left-10 w-20 h-20 border-l border-t border-white/5 pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-20 h-20 border-r border-b border-white/5 pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          className="flex items-center gap-4 mb-16"
         >
-          Our Visionary Founder
-        </motion.h2>
+          <div className="h-px w-12 bg-accent" />
+          <h2 className="text-xs uppercase tracking-[0.4em] text-accent font-mono">
+            Our Visionary Founder
+          </h2>
+        </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Text Content (Left) */}
@@ -26,9 +33,9 @@ export default function Founders() {
               Founder Secretary, JSPM & President, TSSM
             </div>
             
-            <h3 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-8 leading-tight">
+            <h3 className="text-5xl md:text-7xl font-black text-white tracking-tighter mb-8 leading-[0.9]">
               Hon. Prof. Dr. <br />
-              <span className="text-accent">T. J. Sawant Sir</span>
+              <span className="text-accent italic">T. J. Sawant Sir</span>
             </h3>
             
             <div className="space-y-6 mb-12">

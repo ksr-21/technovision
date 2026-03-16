@@ -6,6 +6,8 @@
   --font-serif: "Cormorant Garamond", serif;
   --color-accent: var(--accent-color);
   --color-accent-glow: var(--accent-glow);
+  --color-neon-cyan: #00f3ff;
+  --color-neon-magenta: #ff00ff;
 }
 
 :root {
@@ -22,6 +24,26 @@ body {
   color: #f5f5f5;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.15;
 }
 
 /* Custom scrollbar */
@@ -46,13 +68,14 @@ body {
 .text-display {
   font-family: var(--font-serif);
   line-height: 0.9;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.06em;
+  font-weight: 900;
 }
 
 .text-body {
   font-family: var(--font-sans);
-  line-height: 1.6;
-  letter-spacing: -0.01em;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
 }
 
 .divider {
@@ -61,3 +84,15 @@ body {
   width: 100%;
 }
 
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.animate-glitch {
+  animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
+}
