@@ -30,7 +30,7 @@ const leaders = [
 
 export default function Leadership() {
   return (
-    <section className="py-24 px-6 bg-black/60 border-b border-white/5">
+    <section id="leadership" className="py-24 px-6 bg-black/60 border-b border-white/5">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-center text-4xl font-bold text-white mb-16 tracking-tighter">
           Institutional Leadership

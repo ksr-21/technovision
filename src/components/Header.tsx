@@ -84,36 +84,6 @@ export default function Header() {
         </motion.div>
       </div>
       
-      {/* Bottom Navigation */}
-      <div className="mt-8 border-t border-white/5 pt-6 hidden md:block">
-        <nav className="max-w-7xl mx-auto px-6">
-          <ul className="flex justify-center items-center gap-10">
-            {[
-              { name: 'SPPU', url: 'http://www.unipune.ac.in/' },
-              { name: 'AICTE', url: 'https://www.aicte-india.org/' },
-              { name: 'MOODLE', url: 'http://114.143.232.170/moodle/' },
-              { name: 'MOOC', url: 'https://swayam.gov.in/' },
-              { name: 'NBA', url: 'https://www.nbaind.org/' },
-              { name: 'Virtual Labs', url: 'https://www.vlab.co.in/' },
-              { name: 'Career', url: 'https://jspmntc.edu.in/Details/99' },
-              { name: 'Grievance', url: 'https://jspmntc.edu.in/Details/102' },
-              { name: 'AICTE Feedback', url: 'https://css.aicte-india.org/feedback/index.php' }
-            ].map((link) => (
-              <li key={link.name}>
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40 hover:text-accent transition-colors duration-300"
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-
       {/* Tech accent bar */}
       <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-[4px] bg-accent blur-sm opacity-50" />
