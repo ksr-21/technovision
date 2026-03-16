@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import JSPM from '../accets/JSPM.png';
 
 export default function Founders() {
   return (
@@ -74,10 +75,9 @@ export default function Founders() {
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-blue-600 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
               <div className="relative bg-zinc-900 border border-white/10 rounded-full p-2">
                 <img 
-                  src="https://jspmntc.edu.in/storage/Menus/ListMenu/3/1632652215TJSawant.jpeg" 
+                  src={JSPM}
                   alt="Hon. Prof. Dr. T. J. Sawant Sir"
                   className="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                  referrerPolicy="no-referrer"
                 />
               </div>
             </div>
