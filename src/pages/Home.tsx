@@ -18,7 +18,7 @@ export default function Home() {
     <>
       {/* Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-emerald-500 origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-accent origin-left z-50"
         style={{ scaleX }}
       />
 
@@ -37,15 +37,15 @@ export default function Home() {
             <h2 className="text-6xl md:text-8xl font-black text-white tracking-tighter mb-4">
               TECHNO<motion.span
                 animate={{
-                  color: ['#10b981', '#3b82f6', '#10b981'],
+                  color: ['var(--accent-color)', '#ef4444', 'var(--accent-color)'],
                   textShadow: [
-                    '0 0 20px rgba(16,185,129,0.3)',
-                    '0 0 40px rgba(59,130,246,0.5)',
-                    '0 0 20px rgba(16,185,129,0.3)'
+                    '0 0 20px var(--accent-glow)',
+                    '0 0 40px var(--accent-glow)',
+                    '0 0 20px var(--accent-glow)'
                   ]
                 }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="text-emerald-500"
+                className="text-accent"
               >VISION</motion.span> 2026
             </h2>
             <p className="text-xl md:text-2xl text-gray-400 font-light tracking-widest uppercase">

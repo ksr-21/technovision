@@ -123,16 +123,37 @@ export default function ThreeScene() {
     ? location.pathname.split('/').pop() || 'default'
     : 'default';
 
-  const config = deptConfigs[deptId] || deptConfigs.default;
+  const [accentColor, setAccentColor] = React.useState('#ef4444');
 
   useEffect(() => {
+    const updateColor = () => {
+      const color = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+      if (color) setAccentColor(color);
+    };
+
+    updateColor();
+
+    const observer = new MutationObserver(updateColor);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
+
     const handleMouseMove = (e: MouseEvent) => {
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      observer.disconnect();
+    };
   }, []);
+
+  const config = useMemo(() => {
+    const baseConfig = deptConfigs[deptId] || deptConfigs.default;
+    if (deptId === 'default') {
+      return { ...baseConfig, color: accentColor, secondaryColor: accentColor };
+    }
+    return baseConfig;
+  }, [deptId, accentColor]);
 
   return (
     <div className="fixed inset-0 -z-10 bg-[#050505]">

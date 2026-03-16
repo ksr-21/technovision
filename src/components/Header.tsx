@@ -17,7 +17,7 @@ export default function Header() {
             className="flex items-center group"
           >
             <div className="relative p-2 bg-white rounded-xl shadow-lg">
-              <div className="absolute -inset-2 bg-emerald-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute -inset-2 bg-accent/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <img
                 src={jspm1}
                 alt="JSPM Logo"
@@ -55,11 +55,11 @@ export default function Header() {
           </h1>
           <div className="mt-3 flex flex-col items-center gap-1">
             <div className="flex items-center gap-2">
-              <div className="hidden md:block h-px w-8 bg-emerald-500/50" />
-              <p className="text-xs md:text-base font-medium text-emerald-400 uppercase tracking-[0.2em] font-mono text-center">
+              <div className="hidden md:block h-px w-8 bg-accent/50" />
+              <p className="text-xs md:text-base font-medium text-accent uppercase tracking-[0.2em] font-mono text-center">
                 NAAC With an 'A' Grade
               </p>
-              <div className="hidden md:block h-px w-8 bg-emerald-500/50" />
+              <div className="hidden md:block h-px w-8 bg-accent/50" />
             </div>
             <p className="text-xs font-mono text-gray-500 tracking-widest mt-1">
               INSTITUTE CODE : <span className="text-gray-300">06755</span>
@@ -74,7 +74,7 @@ export default function Header() {
           whileHover={{ scale: 1.05 }}
           className="hidden md:flex items-center md:order-3"
         >
-          <div className="p-2 bg-white rounded-xl shadow-lg border border-white/10 hover:border-emerald-500/50 transition-colors">
+          <div className="p-2 bg-white rounded-xl shadow-lg border border-white/10 hover:border-accent/50 transition-colors">
             <img 
               src={jspm2}
               alt="Campus Logo" 
@@ -84,9 +84,39 @@ export default function Header() {
         </motion.div>
       </div>
       
+      {/* Bottom Navigation */}
+      <div className="mt-8 border-t border-white/5 pt-6 hidden md:block">
+        <nav className="max-w-7xl mx-auto px-6">
+          <ul className="flex justify-center items-center gap-10">
+            {[
+              { name: 'SPPU', url: 'http://www.unipune.ac.in/' },
+              { name: 'AICTE', url: 'https://www.aicte-india.org/' },
+              { name: 'MOODLE', url: 'http://114.143.232.170/moodle/' },
+              { name: 'MOOC', url: 'https://swayam.gov.in/' },
+              { name: 'NBA', url: 'https://www.nbaind.org/' },
+              { name: 'Virtual Labs', url: 'https://www.vlab.co.in/' },
+              { name: 'Career', url: 'https://jspmntc.edu.in/Details/99' },
+              { name: 'Grievance', url: 'https://jspmntc.edu.in/Details/102' },
+              { name: 'AICTE Feedback', url: 'https://css.aicte-india.org/feedback/index.php' }
+            ].map((link) => (
+              <li key={link.name}>
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40 hover:text-accent transition-colors duration-300"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
       {/* Tech accent bar */}
-      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-[4px] bg-emerald-500 blur-sm opacity-50" />
+      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-[4px] bg-accent blur-sm opacity-50" />
     </header>
   );
 }

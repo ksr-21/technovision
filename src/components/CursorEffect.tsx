@@ -28,7 +28,7 @@ export default function CursorEffect() {
     <>
       {/* Main Glow */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 bg-emerald-500/30 rounded-full pointer-events-none z-[100] blur-md"
+        className="fixed top-0 left-0 w-8 h-8 bg-accent/30 rounded-full pointer-events-none z-[100] blur-md"
         style={{
           x: cursorX,
           y: cursorY,
@@ -40,7 +40,7 @@ export default function CursorEffect() {
       
       {/* Outer Ring */}
       <motion.div
-        className="fixed top-0 left-0 w-12 h-12 border border-emerald-500/20 rounded-full pointer-events-none z-[100]"
+        className="fixed top-0 left-0 w-12 h-12 border border-accent/20 rounded-full pointer-events-none z-[100]"
         style={{
           x: cursorX,
           y: cursorY,
@@ -53,7 +53,7 @@ export default function CursorEffect() {
       {/* Trailing Particles (Subtle) */}
       <div className="fixed inset-0 pointer-events-none z-[99] overflow-hidden">
         <motion.div
-          className="absolute w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl"
+          className="absolute w-64 h-64 bg-accent/5 rounded-full blur-3xl"
           style={{
             x: cursorX,
             y: cursorY,

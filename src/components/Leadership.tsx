@@ -43,10 +43,10 @@ export default function Leadership() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="flex flex-col items-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/30 transition-colors text-center"
+              className="flex flex-col items-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-accent/30 transition-colors text-center"
             >
               <h3 className="text-xl font-bold text-white mb-2">{leader.name}</h3>
-              <p className="text-emerald-400 font-mono text-xs uppercase tracking-wider leading-relaxed">
+              <p className="text-accent font-mono text-xs uppercase tracking-wider leading-relaxed">
                 {leader.designation}
               </p>
             </motion.div>
