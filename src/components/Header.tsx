@@ -1,35 +1,55 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import jspm1 from '../accets/jspm1.png';
+import jspm2 from '../accets/jspm2.png';
 
 export default function Header() {
   return (
     <header className="w-full bg-black/40 backdrop-blur-xl border-b border-white/10 py-6 px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
-        {/* Left Logo */}
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          whileHover={{ scale: 1.05 }}
-          className="flex flex-col items-center group"
-        >
-          <div className="relative p-2 bg-white rounded-xl shadow-lg">
-            <div className="absolute -inset-2 bg-emerald-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-            <img 
-              src="https://jspmntc.edu.in/storage/Menus/ListMenu/20/1750230968jspm1.webp" 
-              alt="JSPM Logo" 
-              className="h-16 md:h-20 w-auto object-contain relative z-10"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-          <span className="text-emerald-500 font-mono font-bold text-xl mt-2 tracking-widest">JSPM</span>
-        </motion.div>
+        {/* Mobile Logo Container */}
+        <div className="flex w-full md:w-auto justify-between items-center md:order-1">
+          {/* Left Logo */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.05 }}
+            className="flex flex-col items-center group"
+          >
+            <div className="relative p-2 bg-white rounded-xl shadow-lg">
+              <div className="absolute -inset-2 bg-emerald-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <img
+                src={jspm1}
+                alt="JSPM Logo"
+                className="h-16 md:h-20 w-auto object-contain relative z-10"
+              />
+            </div>
+            <span className="text-emerald-500 font-mono font-bold text-xl mt-2 tracking-widest">JSPM</span>
+          </motion.div>
+
+          {/* Right Logo (Mobile Only) */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.05 }}
+            className="md:hidden"
+          >
+            <div className="p-2 bg-white rounded-xl shadow-lg border border-white/10">
+              <img
+                src={jspm2}
+                alt="Campus Logo"
+                className="h-16 w-auto object-contain"
+              />
+            </div>
+          </motion.div>
+        </div>
 
         {/* Center Title */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           whileHover={{ y: -5 }}
-          className="text-center flex-1"
+          className="text-center flex-1 md:order-2"
         >
           <h1 className="text-2xl md:text-4xl font-black text-white tracking-tighter uppercase">
             JSPM Narhe Technical Campus
@@ -48,19 +68,18 @@ export default function Header() {
           </div>
         </motion.div>
 
-        {/* Right Logos */}
+        {/* Right Logo (Desktop Only) */}
         <motion.div 
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           whileHover={{ scale: 1.05 }}
-          className="flex items-center gap-6"
+          className="hidden md:flex items-center md:order-3"
         >
           <div className="p-2 bg-white rounded-xl shadow-lg border border-white/10 hover:border-emerald-500/50 transition-colors">
             <img 
-              src="https://jspmntc.edu.in/storage/Menus/ListMenu/20/17502310382Logo.png" 
+              src={jspm2}
               alt="Campus Logo" 
               className="h-12 md:h-16 w-auto object-contain"
-              referrerPolicy="no-referrer"
             />
           </div>
         </motion.div>

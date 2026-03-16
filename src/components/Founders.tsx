@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import JSPM from '../accets/JSPM.png';
 
 export default function Founders() {
   return (
@@ -77,7 +78,6 @@ export default function Founders() {
                   src="https://in.images.search.yahoo.com/search/images;_ylt=AwrKDb39sbdpHAIAOfK7HAx.;_ylu=Y29sbwNzZzMEcG9zAzEEdnRpZAMEc2VjA3BpdnM-?p=TJ+Sawant&fr2=piv-web&type=E210IN885G0&fr=mcafee#id=2&iurl=https%3A%2F%2Fwww.jspmrscoe.edu.in%2FImages%2FFounderSecretary%2Ffoundersecretary.jpg&action=click" 
                   alt="Hon. Prof. Dr. T. J. Sawant Sir"
                   className="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                  referrerPolicy="no-referrer"
                 />
               </div>
             </div>
