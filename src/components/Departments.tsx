@@ -22,14 +22,9 @@ export default function Departments() {
           <motion.h2 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="text-center text-6xl md:text-8xl font-black text-white tracking-tighter uppercase relative"
+            className="text-center text-4xl md:text-8xl font-black text-white tracking-tighter uppercase relative"
           >
             Competitions
-            <motion.div
-              initial={{ width: 0, x: "-50%" }}
-              whileInView={{ width: "120px" }}
-              className="absolute -bottom-6 left-1/2 h-1.5 bg-accent rounded-full shadow-[0_0_20px_var(--accent-glow)]"
-            />
           </motion.h2>
         </div>
 

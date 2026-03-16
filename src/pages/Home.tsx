@@ -55,13 +55,13 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="text-center relative z-10 p-20"
+            className="text-center relative z-10 p-8 md:p-20"
           >
             {/* HUD Elements */}
-            <HUDCorner className="top-0 left-0 border-t-2 border-l-2" />
-            <HUDCorner className="top-0 right-0 border-t-2 border-r-2" />
-            <HUDCorner className="bottom-0 left-0 border-b-2 border-l-2" />
-            <HUDCorner className="bottom-0 right-0 border-b-2 border-r-2" />
+            <HUDCorner className="hidden md:block top-0 left-0 border-t-2 border-l-2" />
+            <HUDCorner className="hidden md:block top-0 right-0 border-t-2 border-r-2" />
+            <HUDCorner className="hidden md:block bottom-0 left-0 border-b-2 border-l-2" />
+            <HUDCorner className="hidden md:block bottom-0 right-0 border-b-2 border-r-2" />
 
             <h2 className="text-4xl md:text-9xl font-black text-white tracking-tighter mb-4 relative">
               <motion.span
@@ -107,17 +107,6 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          {/* Scrolling Technical Data Decorative */}
-          <div className="absolute bottom-10 left-10 hidden lg:block opacity-20 font-mono text-[10px] text-neon-cyan pointer-events-none">
-            <motion.div
-              animate={{ y: [0, -100] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            >
-              {[...Array(10)].map((_, i) => (
-                <div key={i}>SCAN_TYPE: SECTOR_{Math.random().toString(16).slice(2, 6).toUpperCase()}</div>
-              ))}
-            </motion.div>
-          </div>
         </section>
 
         <Founders />
