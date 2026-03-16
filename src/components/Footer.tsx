@@ -57,8 +57,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-12 border-t border-white/10">
-          <div className="flex items-center gap-6 text-white/20 text-[10px] uppercase tracking-[0.4em]">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-12 md:gap-8 pt-12 border-t border-white/10">
+          <div className="flex flex-col md:flex-row items-center gap-6 text-white/20 text-[10px] uppercase tracking-[0.4em]">
             <div className="flex items-center gap-3">
               <span>Made by</span>
               <motion.div className="flex items-center gap-4">
@@ -85,12 +85,12 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 order-3 md:order-2">
             <span className="text-white font-serif text-xl italic">JSPM.</span>
             <span className="text-white/20 text-xs uppercase tracking-widest">© 2026</span>
           </div>
 
-          <div className="text-white/20 text-[10px] uppercase tracking-[0.4em] text-right">
+          <div className="text-white/20 text-[10px] uppercase tracking-[0.4em] text-center md:text-right order-2 md:order-3">
             JSPM Narhe Technical Campus • Pune
           </div>
         </div>

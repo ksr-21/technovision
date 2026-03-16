@@ -37,11 +37,6 @@ export default function Leadership() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col items-center mb-20">
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "80px" }}
-            className="h-1 bg-accent mb-6"
-          />
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -50,7 +50,7 @@ export default function App() {
         </div>
 
         {/* Aesthetic Overlays */}
-        <div className="fixed inset-0 pointer-events-none z-20">
+        <div className="fixed inset-0 pointer-events-none z-20 hidden md:block">
           {/* Corner Accents */}
           <div className="absolute top-8 left-8 w-12 h-12 border-t-2 border-l-2 border-accent/30" />
           <div className="absolute top-8 right-8 w-12 h-12 border-t-2 border-r-2 border-accent/30" />

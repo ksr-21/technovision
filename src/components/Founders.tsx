@@ -6,8 +6,8 @@ export default function Founders() {
   return (
     <section id="about" className="py-32 px-6 relative overflow-hidden bg-black/40 backdrop-blur-sm border-y border-white/5">
       {/* HUD Decorative Elements */}
-      <div className="absolute top-10 left-10 w-20 h-20 border-l border-t border-white/5 pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-20 h-20 border-r border-b border-white/5 pointer-events-none" />
+      <div className="hidden md:block absolute top-10 left-10 w-20 h-20 border-l border-t border-white/5 pointer-events-none" />
+      <div className="hidden md:block absolute bottom-10 right-10 w-20 h-20 border-r border-b border-white/5 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
@@ -15,7 +15,6 @@ export default function Founders() {
           whileInView={{ opacity: 1, x: 0 }}
           className="flex items-center gap-4 mb-16"
         >
-          <div className="h-px w-12 bg-accent" />
           <h2 className="text-xs uppercase tracking-[0.4em] text-accent font-mono">
             Our Visionary Founder
           </h2>
@@ -51,17 +50,17 @@ export default function Founders() {
               </p>
             </div>
 
-            <div className="flex justify-center md:justify-start gap-12 pt-12 border-t border-white/10">
+            <div className="flex justify-center md:justify-start gap-4 md:gap-12 pt-12 border-t border-white/10">
               <div className="text-center md:text-left">
-                <p className="text-4xl font-black text-white">20+</p>
+                <p className="text-3xl md:text-4xl font-black text-white">20+</p>
                 <p className="text-[10px] text-accent uppercase tracking-widest mt-2 font-mono">Institutes</p>
               </div>
               <div className="text-center md:text-left">
-                <p className="text-4xl font-black text-white">50k+</p>
+                <p className="text-3xl md:text-4xl font-black text-white">50k+</p>
                 <p className="text-[10px] text-accent uppercase tracking-widest mt-2 font-mono">Alumni</p>
               </div>
               <div className="text-center md:text-left">
-                <p className="text-4xl font-black text-white">100+</p>
+                <p className="text-3xl md:text-4xl font-black text-white">100+</p>
                 <p className="text-[10px] text-accent uppercase tracking-widest mt-2 font-mono">Courses</p>
               </div>
             </div>
