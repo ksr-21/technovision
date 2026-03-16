@@ -176,22 +176,22 @@ export default function DepartmentDetail() {
                 className="p-8 rounded-[2.5rem] bg-zinc-950/60 border border-white/10 backdrop-blur-3xl shadow-xl shadow-current/5"
               >
                 <h4 className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/30 mb-8 flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
                   Faculty Mentors
                 </h4>
                 <div className="space-y-6">
                   {dept.coordinators.faculty.map((fac, i) => (
                     <div key={i} className="group">
-                      <p className="text-white font-bold text-lg mb-3 group-hover:text-emerald-400 transition-colors">{fac.name}</p>
+                      <p className="text-white font-bold text-lg mb-3 group-hover:text-accent transition-colors">{fac.name}</p>
                       <div className="flex flex-col gap-2">
                         <a href={`tel:${fac.phone}`} className="flex items-center gap-3 text-sm text-white/40 hover:text-white transition-all">
-                          <div className="p-2 rounded-lg bg-white/5 border border-white/5 group-hover:border-emerald-500/30">
+                          <div className="p-2 rounded-lg bg-white/5 border border-white/5 group-hover:border-accent/30">
                             <Phone size={14} />
                           </div>
                           {fac.phone}
                         </a>
                         <a href={`mailto:${fac.email}`} className="flex items-center gap-3 text-sm text-white/40 hover:text-white transition-all">
-                          <div className="p-2 rounded-lg bg-white/5 border border-white/5 group-hover:border-emerald-500/30">
+                          <div className="p-2 rounded-lg bg-white/5 border border-white/5 group-hover:border-accent/30">
                             <Mail size={14} />
                           </div>
                           {fac.email}

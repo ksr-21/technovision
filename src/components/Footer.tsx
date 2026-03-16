@@ -12,7 +12,7 @@ export default function Footer() {
               Future of <br />
               <span className="italic text-white/40">Engineering.</span>
             </h2>
-            <button className="px-12 py-4 bg-emerald-500 text-black rounded-full text-sm uppercase tracking-widest hover:bg-emerald-400 transition-all font-bold">
+            <button className="px-12 py-4 bg-accent text-black rounded-full text-sm uppercase tracking-widest hover:opacity-80 transition-all font-bold">
               Admissions 2026
             </button>
           </div>

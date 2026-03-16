@@ -4,6 +4,13 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", serif;
+  --color-accent: var(--accent-color);
+  --color-accent-glow: var(--accent-glow);
+}
+
+:root {
+  --accent-color: #ef4444;
+  --accent-glow: rgba(239, 68, 68, 0.3);
 }
 
 html {
