@@ -17,14 +17,14 @@ export default function Departments() {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-gray-500 font-mono text-[10px] tracking-[0.6em] mb-4 uppercase"
           >
-            Academic Innovation
+            Event Categories
           </motion.p>
           <motion.h2 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             className="text-center text-6xl md:text-8xl font-black text-white tracking-tighter uppercase relative"
           >
-            Departments
+            Competitions
             <motion.div
               initial={{ width: 0, x: "-50%" }}
               whileInView={{ width: "120px" }}
