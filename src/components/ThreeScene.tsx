@@ -80,9 +80,9 @@ function Particles({ count = 1000, color = "#10b981" }) {
   const points = useMemo(() => {
     const p = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      p[i * 3] = (Math.random() - 0.5) * 50;
-      p[i * 3 + 1] = (Math.random() - 0.5) * 50;
-      p[i * 3 + 2] = (Math.random() - 0.5) * 50;
+      p[i * 3] = (Math.random() - 0.5) * 100;
+      p[i * 3 + 1] = (Math.random() - 0.5) * 100;
+      p[i * 3 + 2] = (Math.random() - 0.5) * 100;
     }
     return p;
   }, [count]);
@@ -91,7 +91,8 @@ function Particles({ count = 1000, color = "#10b981" }) {
 
   useFrame((state) => {
     if (pointsRef.current) {
-      pointsRef.current.rotation.y = state.clock.getElapsedTime() * 0.05;
+      pointsRef.current.rotation.y = state.clock.getElapsedTime() * 0.03;
+      pointsRef.current.rotation.x = state.clock.getElapsedTime() * 0.02;
     }
   });
 
@@ -105,14 +106,56 @@ function Particles({ count = 1000, color = "#10b981" }) {
           itemSize={3}
         />
       </bufferGeometry>
-      <pointsMaterial size={0.05} color={color} transparent opacity={0.4} />
+      <pointsMaterial
+        size={0.08}
+        color={color}
+        transparent
+        opacity={0.6}
+        sizeAttenuation
+        blending={THREE.AdditiveBlending}
+      />
     </points>
   );
 }
 
-function FloatingGrid({ color }: { color: string }) {
+function BackgroundStructure({ color }: { color: string }) {
+  const ref = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+    if (ref.current) {
+      ref.current.rotation.y = state.clock.getElapsedTime() * 0.1;
+      ref.current.rotation.z = state.clock.getElapsedTime() * 0.05;
+    }
+  });
+
   return (
-    <gridHelper args={[100, 50, color, 0x111111]} position={[0, -10, 0]} rotation={[Math.PI / 6, 0, 0]} />
+    <group ref={ref}>
+      <Dodecahedron args={[25, 0]}>
+        <meshStandardMaterial color={color} wireframe transparent opacity={0.05} />
+      </Dodecahedron>
+      <Icosahedron args={[30, 1]}>
+        <meshStandardMaterial color={color} wireframe transparent opacity={0.03} />
+      </Icosahedron>
+    </group>
+  );
+}
+
+function FloatingGrid({ color }: { color: string }) {
+  const ref = useRef<THREE.GridHelper>(null);
+
+  useFrame((state) => {
+    if (ref.current) {
+      ref.current.position.z = (state.clock.getElapsedTime() * 2) % 2;
+    }
+  });
+
+  return (
+    <gridHelper
+      ref={ref}
+      args={[100, 50, color, 0x111111]}
+      position={[0, -12, 0]}
+      rotation={[0, 0, 0]}
+    />
   );
 }
 
@@ -177,23 +220,25 @@ function SceneContent({ mouse, config, deptId }: {
 
   return (
     <>
-      <color attach="background" args={['#050505']} />
-      <ambientLight intensity={0.2} />
-      <pointLight position={[10, 10, 10]} intensity={1} color={config.color} />
-      <spotLight position={[-10, 10, 10]} angle={0.15} penumbra={1} intensity={1} color={config.secondaryColor} />
+      <color attach="background" args={['#020202']} />
+      <ambientLight intensity={0.1} />
+      <pointLight position={[10, 10, 10]} intensity={2} color={config.color} />
+      <pointLight position={[-10, -10, -10]} intensity={1} color={config.secondaryColor} />
+      <spotLight position={[0, 20, 0]} angle={0.3} penumbra={1} intensity={2} color={config.color} />
       
       {deptId === 'default' ? (
         <>
-          <TechElement position={[-10, 5, -5]} color="#4f46e5" speed={0.5} />
-          <TechElement position={[10, -5, -2]} color="#10b981" speed={0.8} />
-          <TechElement position={[0, 8, -10]} color="#f59e0b" speed={0.3} />
+          <TechElement position={[-12, 6, -8]} color="#00f2ff" speed={0.5} />
+          <TechElement position={[12, -6, -5]} color="#ff00ea" speed={0.8} />
+          <TechElement position={[0, 10, -12]} color="#4f46e5" speed={0.3} />
         </>
       ) : (
         <DepartmentGeometry deptId={deptId} color={config.color} />
       )}
       
-      <Particles count={2000} color={config.color} />
-      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+      <BackgroundStructure color={config.color} />
+      <Particles count={4000} color={config.color} />
+      <Stars radius={100} depth={50} count={7000} factor={6} saturation={0} fade speed={1.5} />
       <FloatingGrid color={config.color} />
       <OrbitControls enableZoom={false} enablePan={false} />
     </>
