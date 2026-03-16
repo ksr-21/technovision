@@ -36,8 +36,7 @@ export default function App() {
 
   return (
     <Router>
-      <div className="min-h-screen font-sans selection:bg-accent/30 selection:text-accent cursor-none">
-        <CursorEffect />
+      <div className="min-h-screen font-sans selection:bg-accent/30 selection:text-accent">
         
         {/* 3D Background */}
         <ThreeScene />

@@ -84,7 +84,7 @@ export default function Founders() {
                <img 
   src={JSPM}
   alt="Hon. Prof. Dr. T. J. Sawant Sir"
-  className="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+  className="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-700"
 />
               </div>
             </div>

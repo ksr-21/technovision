@@ -63,7 +63,7 @@ export default function Home() {
             <HUDCorner className="bottom-0 left-0 border-b-2 border-l-2" />
             <HUDCorner className="bottom-0 right-0 border-b-2 border-r-2" />
 
-            <h2 className="text-6xl md:text-9xl font-black text-white tracking-tighter mb-4 relative">
+            <h2 className="text-4xl md:text-9xl font-black text-white tracking-tighter mb-4 relative">
               <motion.span
                 animate={{
                   opacity: [1, 0.8, 1, 0.9, 1],

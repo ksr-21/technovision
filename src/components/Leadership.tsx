@@ -52,7 +52,8 @@ export default function Leadership() {
           <p className="text-gray-500 font-mono text-xs tracking-[0.3em] mt-4 uppercase">Governance & Excellence</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Desktop Grid */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6">
           {leaders.map((leader, index) => (
             <motion.div
               key={leader.name}
@@ -73,6 +74,38 @@ export default function Leadership() {
               </p>
             </motion.div>
           ))}
+        </div>
+
+        {/* Mobile Scrolling Container */}
+        <div className="md:hidden overflow-x-auto scrollbar-hide">
+          <motion.div
+            animate={{
+              x: [0, "-50%"],
+            }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 30,
+                ease: "linear",
+              },
+            }}
+            className="flex gap-6 whitespace-nowrap"
+            style={{ width: "fit-content" }}
+          >
+            {[...leaders, ...leaders].map((leader, index) => (
+              <div
+                key={`${leader.name}-${index}`}
+                className="w-[280px] flex-shrink-0 flex flex-col items-center p-10 rounded-xl bg-zinc-950/40 backdrop-blur-md border border-white/5 text-center relative overflow-hidden"
+              >
+                <h3 className="text-lg font-bold text-white mb-3 whitespace-normal">{leader.name}</h3>
+                <div className="w-8 h-px bg-white/10 mb-4" />
+                <p className="text-gray-400 font-mono text-[10px] uppercase tracking-wider leading-relaxed whitespace-normal">
+                  {leader.designation}
+                </p>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

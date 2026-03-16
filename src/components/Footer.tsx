@@ -11,11 +11,8 @@ export default function Footer() {
             <h2 className="text-display text-7xl text-white mb-12">
               Shaping the <br />
               Future of <br />
-              <span className="italic text-white/40">Engineering.</span>
+              <span className="italic text-white/40">Students.</span>
             </h2>
-            <button id="registration" className="px-12 py-4 bg-accent text-black rounded-full text-sm uppercase tracking-widest hover:opacity-80 transition-all font-bold">
-              Admissions 2026
-            </button>
           </div>
 
           <div className="grid grid-cols-2 gap-12">
@@ -25,7 +22,7 @@ export default function Footer() {
                 {[
                   { name: 'About', href: '#about' },
                   { name: 'Registration', href: '#registration' },
-                  { name: 'Departments', href: '#departments' },
+                  { name: 'Competitions', href: '#departments' },
                   { name: 'Leadership', href: '#leadership' },
                   { name: 'Contact', href: '#contact' }
                 ].map(item => (
@@ -61,10 +58,6 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-12 border-t border-white/10">
-          <div className="flex items-center gap-4">
-            <span className="text-white font-serif text-xl italic">JSPM.</span>
-            <span className="text-white/20 text-xs uppercase tracking-widest">© 2026</span>
-          </div>
           <div className="flex items-center gap-6 text-white/20 text-[10px] uppercase tracking-[0.4em]">
             <div className="flex items-center gap-3">
               <span>Made by</span>
@@ -91,8 +84,14 @@ export default function Footer() {
               </motion.div>
             </div>
           </div>
-          <div className="text-white/20 text-[10px] uppercase tracking-[0.4em]">
-            Narhe Technical Campus • Pune • India
+
+          <div className="flex items-center gap-4">
+            <span className="text-white font-serif text-xl italic">JSPM.</span>
+            <span className="text-white/20 text-xs uppercase tracking-widest">© 2026</span>
+          </div>
+
+          <div className="text-white/20 text-[10px] uppercase tracking-[0.4em] text-right">
+            JSPM Narhe Technical Campus • Pune
           </div>
         </div>
       </div>

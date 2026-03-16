@@ -226,13 +226,7 @@ function SceneContent({ mouse, config, deptId }: {
       <pointLight position={[-10, -10, -10]} intensity={1} color={config.secondaryColor} />
       <spotLight position={[0, 20, 0]} angle={0.3} penumbra={1} intensity={2} color={config.color} />
       
-      {deptId === 'default' ? (
-        <>
-          <TechElement position={[-12, 6, -8]} color="#00f2ff" speed={0.5} />
-          <TechElement position={[12, -6, -5]} color="#ff00ea" speed={0.8} />
-          <TechElement position={[0, 10, -12]} color="#4f46e5" speed={0.3} />
-        </>
-      ) : (
+      {deptId === 'default' ? null : (
         <DepartmentGeometry deptId={deptId} color={config.color} />
       )}
       
