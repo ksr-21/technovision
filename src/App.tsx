@@ -7,6 +7,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import DepartmentDetail from './pages/DepartmentDetail';
+import Registration from './pages/Registration';
 import ThreeScene from './components/ThreeScene';
 import CursorEffect from './components/CursorEffect';
 import { useScroll, useTransform, useMotionValueEvent } from 'motion/react';
@@ -46,6 +47,8 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/department/:id" element={<DepartmentDetail />} />
+            <Route path="/register" element={<Registration />} />
+            <Route path="/register/:id" element={<Registration />} />
           </Routes>
         </div>
 
