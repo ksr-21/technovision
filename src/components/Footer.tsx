@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Globe, Linkedin, Instagram } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -20,14 +21,18 @@ export default function Footer() {
               <h4 className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-8">Quick Links</h4>
               <ul className="space-y-4">
                 {[
-                  { name: 'About', href: '#about' },
-                  { name: 'Registration', href: '#registration' },
-                  { name: 'Competitions', href: '#departments' },
-                  { name: 'Leadership', href: '#leadership' },
-                  { name: 'Contact', href: '#contact' }
+                  { name: 'About', href: '#about', type: 'anchor' },
+                  { name: 'Registration', href: '/register', type: 'link' },
+                  { name: 'Competitions', href: '#departments', type: 'anchor' },
+                  { name: 'Leadership', href: '#leadership', type: 'anchor' },
+                  { name: 'Contact', href: '#contact', type: 'anchor' }
                 ].map(item => (
                   <li key={item.name}>
-                    <a href={item.href} className="text-body text-sm text-white/60 hover:text-white transition-colors">{item.name}</a>
+                    {item.type === 'link' ? (
+                      <Link to={item.href} className="text-body text-sm text-white/60 hover:text-white transition-colors">{item.name}</Link>
+                    ) : (
+                      <a href={item.href} className="text-body text-sm text-white/60 hover:text-white transition-colors">{item.name}</a>
+                    )}
                   </li>
                 ))}
               </ul>
