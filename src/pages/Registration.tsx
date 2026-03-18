@@ -127,6 +127,28 @@ export default function Registration() {
                   <ArrowRight size={18} className="text-white/20 rotate-90" />
                 </div>
               </div>
+
+              <AnimatePresence mode="wait">
+                {selectedDept?.registrationFee && (
+                  <motion.div
+                    key={`fee-${selectedDeptId}`}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    className={`mt-4 inline-flex items-center gap-3 px-6 py-3 rounded-2xl ${selectedDept.accentBg} border ${selectedDept.borderColor} backdrop-blur-xl`}
+                  >
+                    <div className={`p-2 rounded-lg bg-white/5`}>
+                      <CreditCard size={16} className={selectedDept.textColor} />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] font-mono uppercase tracking-widest opacity-50 text-white">Entry Fee</span>
+                      <span className={`text-sm font-black uppercase tracking-tight ${selectedDept.textColor}`}>
+                        {selectedDept.registrationFee}
+                      </span>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Personal Info */}
@@ -250,7 +272,7 @@ export default function Registration() {
             </div>
 
             <AnimatePresence>
-              {(selectedDeptId === 'aids' || selectedDeptId === 'mech' || selectedDeptId === 'etc') && (
+              {selectedDept?.isTeamEvent && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
@@ -276,8 +298,37 @@ export default function Registration() {
               )}
             </AnimatePresence>
 
-            <div className="md:col-span-2 space-y-4">
-              <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 block ml-4">Payment Transaction ID (Optional)</label>
+            <div className="md:col-span-2 space-y-6">
+              <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 block ml-4">Payment Details</label>
+
+              <AnimatePresence mode="wait">
+                {selectedDept?.paymentScanner && (
+                  <motion.div
+                    key={`scanner-${selectedDeptId}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="flex flex-col md:flex-row items-center gap-8 p-8 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-xl"
+                  >
+                    <div className="relative group/qr shrink-0">
+                      <div className={`absolute -inset-4 rounded-xl opacity-20 blur-2xl transition-all duration-500 group-hover/qr:opacity-40 ${selectedDept.accentBg}`} />
+                      <img
+                        src={selectedDept.paymentScanner}
+                        alt="Payment Scanner"
+                        className="w-48 h-48 rounded-xl relative z-10 border border-white/20 shadow-2xl"
+                      />
+                    </div>
+                    <div className="space-y-4 text-center md:text-left">
+                      <h3 className="text-xl font-black text-white tracking-tight">Scan to Pay</h3>
+                      <p className="text-sm text-white/60 leading-relaxed max-w-xs">
+                        Please pay the registration fee of <span className={`font-bold ${selectedDept.textColor}`}>{selectedDept.registrationFee}</span> using the QR code.
+                        After payment, enter the transaction ID below to complete your registration.
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               <div className="relative group">
                 <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-accent transition-colors">
                   <CreditCard size={18} />
@@ -291,7 +342,9 @@ export default function Registration() {
                   className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-5 pl-16 pr-8 text-white focus:outline-none focus:border-accent/50 transition-all backdrop-blur-xl"
                 />
               </div>
-              <p className="text-[9px] text-white/20 ml-4 italic">* If payment is required, please contact event coordinators listed on the competition page.</p>
+              <p className="text-[9px] text-white/20 ml-4 italic">
+                * Enter your unique Payment Transaction ID (e.g., UTR, Ref No.) to help us verify your registration.
+              </p>
             </div>
 
             <div className="md:col-span-2 mt-8">
