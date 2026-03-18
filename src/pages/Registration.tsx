@@ -4,10 +4,12 @@ import { motion, AnimatePresence } from 'motion/react';
 import {
   User, Mail, Phone, Building, BookOpen,
   Trophy, ArrowRight, CheckCircle, ChevronLeft,
-  Users, CreditCard
+  Users, CreditCard, Loader2
 } from 'lucide-react';
 import { departments } from '../data/departments';
 import { ThematicBackground } from '../components/ThematicBackground';
+import { db } from '../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function Registration() {
   const { id } = useParams();
@@ -15,6 +17,8 @@ export default function Registration() {
 
   const [selectedDeptId, setSelectedDeptId] = useState(id || '');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -42,13 +46,30 @@ export default function Registration() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate API call
-    setTimeout(() => {
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const registrationData = {
+        ...formData,
+        eventId: selectedDeptId,
+        eventName: selectedDept?.eventName || 'General Registration',
+        eventCategory: selectedDept?.name || 'N/A',
+        timestamp: serverTimestamp(),
+      };
+
+      await addDoc(collection(db, 'registrations'), registrationData);
+
       setIsSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 1000);
+    } catch (err) {
+      console.error("Error saving registration: ", err);
+      setError("Failed to submit registration. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -347,13 +368,29 @@ export default function Registration() {
               </p>
             </div>
 
+            {error && (
+              <div className="md:col-span-2 p-4 bg-red-500/10 border border-red-500/50 rounded-2xl text-red-400 text-sm">
+                {error}
+              </div>
+            )}
+
             <div className="md:col-span-2 mt-8">
               <button
                 type="submit"
-                className="w-full py-6 bg-accent text-white font-black rounded-[2rem] hover:bg-white hover:text-black transition-all duration-500 shadow-2xl shadow-accent/20 flex items-center justify-center gap-3 group"
+                disabled={isSubmitting}
+                className="w-full py-6 bg-accent text-white font-black rounded-[2rem] hover:bg-white hover:text-black transition-all duration-500 shadow-2xl shadow-accent/20 flex items-center justify-center gap-3 group disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                COMPLETE REGISTRATION
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                {isSubmitting ? (
+                  <>
+                    PROCESSING...
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    COMPLETE REGISTRATION
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                  </>
+                )}
               </button>
             </div>
           </form>
