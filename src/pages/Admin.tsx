@@ -36,7 +36,8 @@ export default function Admin() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+    // Fallback to "technovision_admin" if VITE_ADMIN_PASSWORD is not set
+    const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD || "technovision_admin";
     if (password === correctPassword) {
       setIsAuthenticated(true);
       setLoginError(false);
