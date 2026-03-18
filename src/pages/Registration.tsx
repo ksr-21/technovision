@@ -52,6 +52,10 @@ export default function Registration() {
     setError(null);
 
     try {
+      if (!db) {
+        throw new Error("Database not initialized. Please contact the administrator.");
+      }
+
       const registrationData = {
         ...formData,
         eventId: selectedDeptId,
@@ -66,7 +70,7 @@ export default function Registration() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       console.error("Error saving registration: ", err);
-      setError("Failed to submit registration. Please try again.");
+      setError(err instanceof Error ? err.message : "Failed to submit registration. Please try again.");
     } finally {
       setIsSubmitting(false);
     }

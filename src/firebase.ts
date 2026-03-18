@@ -16,8 +16,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
-const db = getFirestore(app);
+const isConfigValid = firebaseConfig.projectId && firebaseConfig.apiKey && firebaseConfig.appId;
+
+const app = isConfigValid ? initializeApp(firebaseConfig) : null;
+const analytics = (isConfigValid && typeof window !== 'undefined') ? getAnalytics(app!) : null;
+const db = isConfigValid ? getFirestore(app!) : null;
+
+if (!isConfigValid) {
+  console.warn("Firebase configuration is missing or incomplete. Some features like registration and admin panel may not work correctly.");
+}
 
 export { app, analytics, db };

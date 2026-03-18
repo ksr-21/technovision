@@ -49,6 +49,9 @@ export default function Admin() {
   const fetchRegistrations = async () => {
     setLoading(true);
     try {
+      if (!db) {
+        throw new Error("Database not initialized.");
+      }
       const q = query(collection(db, 'registrations'), orderBy('timestamp', 'desc'));
       const querySnapshot = await getDocs(q);
       const data = querySnapshot.docs.map(doc => ({
