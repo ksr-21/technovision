@@ -3,6 +3,13 @@ import {
   BookOpen, Cpu, Network, Binary, Ruler, HardHat, Globe, TrendingUp,
   Atom, Lightbulb, Database, Layers
 } from 'lucide-react';
+import aidsScanner from '../accets/AIDS129.jpeg';
+import civilScanner from '../accets/civil.jpeg';
+import computerScanner from '../accets/CS50.jpeg';
+import etcScanner from '../accets/E&TC.jpeg';
+import mechScanner from '../accets/Mech300.jpeg';
+import mbaScanner from '../accets/MBA50.jpeg';
+import mcaScanner from '../accets/MCA50.jpeg';
 
 export const departments = [
   {
@@ -16,6 +23,9 @@ export const departments = [
     textColor: 'text-emerald-400',
     accentColor: 'emerald',
     accentBg: 'bg-emerald-500/10',
+    registrationFee: '₹129',
+    isTeamEvent: true,
+    paymentScanner: aidsScanner,
     eventName: 'Intelligence Arena',
     shortEventDescription: 'A multi-round challenge blending coding, cryptography, and AI video creation.',
     eventImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800',
@@ -40,6 +50,9 @@ export const departments = [
     textColor: 'text-orange-400',
     accentColor: 'orange',
     accentBg: 'bg-orange-500/10',
+    registrationFee: '₹300 (Max 3 members)',
+    isTeamEvent: true,
+    paymentScanner: civilScanner,
     eventName: 'LoadBearing Bridge contest',
     shortEventDescription: 'Build and test the ultimate popsicle stick bridge for maximum load capacity.',
     eventImage: 'https://images.unsplash.com/photo-1517713982677-4b66332f98de?auto=format&fit=crop&q=80&w=800',
@@ -64,6 +77,9 @@ export const departments = [
     textColor: 'text-blue-400',
     accentColor: 'blue',
     accentBg: 'bg-blue-500/10',
+    registrationFee: '₹50 per student',
+    isTeamEvent: false,
+    paymentScanner: computerScanner,
     eventName: 'Develop in Dark',
     shortEventDescription: 'Test your syntax knowledge by writing code without compiling or running it.',
     eventImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800',
@@ -88,6 +104,9 @@ export const departments = [
     textColor: 'text-yellow-400',
     accentColor: 'yellow',
     accentBg: 'bg-yellow-500/10',
+    registrationFee: '₹400 per team',
+    isTeamEvent: true,
+    paymentScanner: etcScanner,
     eventName: 'RC Grand Prix',
     shortEventDescription: 'An adrenaline-pumping RC race featuring obstacles and lap challenges.',
     eventImage: 'https://images.unsplash.com/photo-1594859709582-346757136720?auto=format&fit=crop&q=80&w=800',
@@ -115,6 +134,9 @@ export const departments = [
     textColor: 'text-red-400',
     accentColor: 'red',
     accentBg: 'bg-red-500/10',
+    registrationFee: '₹300 per student',
+    isTeamEvent: true,
+    paymentScanner: mechScanner,
     eventName: 'ROBO SOCCER',
     shortEventDescription: 'Design and control custom robots to compete in a high-stakes soccer tournament.',
     eventImage: 'https://images.unsplash.com/photo-1531746790731-6c2079ee3f08?auto=format&fit=crop&q=80&w=800',
@@ -143,6 +165,8 @@ export const departments = [
     textColor: 'text-pink-400',
     accentColor: 'pink',
     accentBg: 'bg-pink-500/10',
+    registrationFee: null,
+    isTeamEvent: false,
     eventName: 'Tech Canvas',
     shortEventDescription: 'Showcase your technical research and innovation through creative visual posters.',
     eventImage: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800',
@@ -167,6 +191,9 @@ export const departments = [
     textColor: 'text-purple-400',
     accentColor: 'purple',
     accentBg: 'bg-purple-500/10',
+    registrationFee: '₹50 per student',
+    isTeamEvent: false,
+    paymentScanner: mbaScanner,
     eventName: 'Biz Carnival',
     shortEventDescription: 'A dynamic platform for future leaders to showcase business strategy and innovation.',
     eventImage: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800',
@@ -191,6 +218,9 @@ export const departments = [
     textColor: 'text-indigo-400',
     accentColor: 'indigo',
     accentBg: 'bg-indigo-500/10',
+    registrationFee: '₹50 per student',
+    isTeamEvent: false,
+    paymentScanner: mcaScanner,
     eventName: 'Coding Hunt',
     shortEventDescription: 'A fast-paced scavenger hunt where code puzzles lead you to the finish line.',
     eventImage: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=800',
