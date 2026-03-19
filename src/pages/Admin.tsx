@@ -37,6 +37,13 @@ export default function Admin() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+
+    if (!correctPassword) {
+      console.error("Admin Access Key is not configured in environment variables.");
+      setLoginError(true);
+      return;
+    }
+
     if (password === correctPassword) {
       setIsAuthenticated(true);
       setLoginError(false);
@@ -47,6 +54,12 @@ export default function Admin() {
   };
 
   const fetchRegistrations = async () => {
+    if (!db) {
+      console.error("Firestore database is not initialized.");
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
     try {
       const q = query(collection(db, 'registrations'), orderBy('timestamp', 'desc'));
@@ -162,7 +175,11 @@ export default function Admin() {
                 />
               </div>
               {loginError && (
-                <p className="text-xs text-red-400 ml-4 font-mono">INVALID ACCESS KEY. ACCESS DENIED.</p>
+                <p className="text-xs text-red-400 ml-4 font-mono uppercase">
+                  {!import.meta.env.VITE_ADMIN_PASSWORD
+                    ? "SYSTEM CONFIGURATION ERROR: ACCESS KEY NOT DEFINED."
+                    : "INVALID ACCESS KEY. ACCESS DENIED."}
+                </p>
               )}
             </div>
 

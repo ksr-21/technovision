@@ -1,23 +1,28 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAUThrw7LioS09gVQvayfFHcHPGvXjdJ6c",
-  authDomain: "taste-of-tradition.firebaseapp.com",
-  projectId: "taste-of-tradition",
-  storageBucket: "taste-of-tradition.firebasestorage.app",
-  messagingSenderId: "512449693402",
-  appId: "1:512449693402:web:2bf9b8c3f3ceabac0387e3",
-  measurementId: "G-SN8P61SGFC"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
+// Check if critical configuration is present
+const isConfigValid = !!(
+  firebaseConfig.apiKey &&
+  firebaseConfig.projectId &&
+  firebaseConfig.appId
+);
+
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
-const db = getFirestore(app);
+const app = isConfigValid ? initializeApp(firebaseConfig) : null;
+const analytics = (isConfigValid && typeof window !== 'undefined') ? getAnalytics(app!) : null;
+const db = isConfigValid ? getFirestore(app!) : null;
 
 export { app, analytics, db };
