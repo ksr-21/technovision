@@ -36,13 +36,8 @@ export default function Admin() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD;
-
-    if (!correctPassword) {
-      console.error("Admin Access Key is not configured in environment variables.");
-      setLoginError(true);
-      return;
-    }
+    // Default fallback to 'admin123' if environment variable is missing
+    const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD || 'admin123';
 
     if (password === correctPassword) {
       setIsAuthenticated(true);
@@ -181,9 +176,7 @@ export default function Admin() {
               </div>
               {loginError && (
                 <p className="text-xs text-red-400 ml-4 font-mono uppercase">
-                  {!import.meta.env.VITE_ADMIN_PASSWORD
-                    ? "SYSTEM CONFIGURATION ERROR: ACCESS KEY NOT DEFINED."
-                    : "INVALID ACCESS KEY. ACCESS DENIED."}
+                  INVALID ACCESS KEY. ACCESS DENIED.
                 </p>
               )}
             </div>
