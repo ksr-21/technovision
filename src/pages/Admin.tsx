@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import {
   ChevronLeft, Database, Download, RefreshCw,
   Search, User, Mail, Phone, Building, Calendar,
-  Trophy, CreditCard, Users, BookOpen
+  Trophy, CreditCard, Users, BookOpen, LogOut
 } from 'lucide-react';
 import { db } from '../firebase';
 import { collection, query, orderBy, getDocs, Timestamp } from 'firebase/firestore';
@@ -51,6 +51,11 @@ export default function Admin() {
     } else {
       setLoginError(true);
     }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('admin_authenticated');
+    setIsAuthenticated(false);
   };
 
   const fetchRegistrations = async () => {
@@ -237,6 +242,13 @@ export default function Admin() {
             >
               <Download size={18} />
               EXPORT CSV
+            </button>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 px-6 py-4 bg-zinc-900 border border-white/10 text-white font-bold rounded-2xl hover:bg-zinc-800 transition-all duration-300"
+            >
+              <LogOut size={18} />
+              LOGOUT
             </button>
           </div>
         </div>
