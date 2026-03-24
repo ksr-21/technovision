@@ -4,9 +4,10 @@ import { motion } from 'motion/react';
 import {
   ChevronLeft, Database, Download, RefreshCw,
   Search, User, Mail, Phone, Building, Calendar,
-  Trophy, CreditCard, Users, BookOpen, LogOut
+  Trophy, CreditCard, Users, BookOpen, LogOut, Filter
 } from 'lucide-react';
 import { db } from '../firebase';
+import { departments } from '../data/departments';
 import { collection, query, orderBy, getDocs, Timestamp } from 'firebase/firestore';
 
 interface RegistrationData {
@@ -30,14 +31,20 @@ export default function Admin() {
   const [registrations, setRegistrations] = useState<RegistrationData[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedEvent, setSelectedEvent] = useState('all');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Default fallback to 'admin123' if environment variable is missing
-    const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD || 'admin123';
+    const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+
+    if (!correctPassword) {
+      console.error("Admin Access Key is not configured in environment variables.");
+      setLoginError(true);
+      return;
+    }
 
     if (password === correctPassword) {
       setIsAuthenticated(true);
@@ -91,12 +98,16 @@ export default function Admin() {
     }
   }, [isAuthenticated]);
 
-  const filteredRegistrations = registrations.filter(reg =>
-    reg.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    reg.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    reg.eventName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    reg.transactionId.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredRegistrations = registrations.filter(reg => {
+    const matchesSearch = reg.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      reg.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      reg.eventName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      reg.transactionId.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesEvent = selectedEvent === 'all' || reg.eventId === selectedEvent;
+
+    return matchesSearch && matchesEvent;
+  });
 
   const exportToCSV = () => {
     const headers = ['Full Name', 'Email', 'Phone', 'College', 'Department', 'Year', 'Event', 'Category', 'Team Name', 'Transaction ID', 'Date'];
@@ -176,7 +187,9 @@ export default function Admin() {
               </div>
               {loginError && (
                 <p className="text-xs text-red-400 ml-4 font-mono uppercase">
-                  INVALID ACCESS KEY. ACCESS DENIED.
+                  {!import.meta.env.VITE_ADMIN_PASSWORD
+                    ? "SYSTEM CONFIGURATION ERROR: ACCESS KEY NOT DEFINED."
+                    : "INVALID ACCESS KEY. ACCESS DENIED."}
                 </p>
               )}
             </div>
@@ -247,18 +260,39 @@ export default function Admin() {
         </div>
 
         {/* Stats & Search */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="md:col-span-3 relative group">
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-8">
+          <div className="md:col-span-2 lg:col-span-2 relative group">
             <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-accent transition-colors">
               <Search size={20} />
             </div>
             <input
               type="text"
-              placeholder="Search by name, email, event or transaction ID..."
+              placeholder="Search by name, email, event or ID..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-5 pl-16 pr-8 text-white focus:outline-none focus:border-accent/50 transition-all backdrop-blur-xl"
             />
+          </div>
+
+          <div className="md:col-span-1 lg:col-span-2 relative group">
+            <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-accent transition-colors">
+              <Filter size={20} />
+            </div>
+            <select
+              value={selectedEvent}
+              onChange={(e) => setSelectedEvent(e.target.value)}
+              className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-5 pl-16 pr-12 text-white focus:outline-none focus:border-accent/50 transition-all backdrop-blur-xl appearance-none cursor-pointer"
+            >
+              <option value="all">All Events</option>
+              {departments.map(dept => (
+                <option key={dept.id} value={dept.id}>
+                  {dept.eventName} ({dept.name})
+                </option>
+              ))}
+            </select>
+            <div className="absolute inset-y-0 right-6 flex items-center pointer-events-none">
+              <Trophy size={18} className="text-white/20" />
+            </div>
           </div>
           <div className="bg-zinc-900/50 border border-white/10 rounded-2xl p-6 backdrop-blur-xl flex flex-col justify-center">
             <span className="text-[10px] font-mono uppercase tracking-widest text-white/40">Total Registrations</span>

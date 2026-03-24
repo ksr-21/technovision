@@ -42,6 +42,14 @@ async def run():
         await page.screenshot(path="/home/jules/verification/admin_panel_auth.png")
         await page.wait_for_timeout(500)
 
+        # 1.1 Test Filtering (Optional check)
+        print("Testing event filtering...")
+        # Select an event (e.g., 'computer')
+        await page.select_option('select', 'computer')
+        await page.wait_for_timeout(500)
+        await page.screenshot(path="/home/jules/verification/admin_filtered.png")
+        print("Filter applied successfully.")
+
         # 2. Logout Flow
         print("Attempting to logout...")
         await page.click('button:has-text("LOGOUT")')
