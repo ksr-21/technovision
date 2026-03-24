@@ -9,7 +9,7 @@ async def run():
         # Create context with video recording
         os.makedirs("/home/jules/verification/video", exist_ok=True)
         context = await browser.new_context(record_video_dir="/home/jules/verification/video")
-        page = await context.new_page()
+        page = await context.new_page() 
 
         # Target URL
         url = "http://localhost:3000/admin"
@@ -64,3 +64,4 @@ async def run():
 
 if __name__ == "__main__":
     asyncio.run(run())
+ 
