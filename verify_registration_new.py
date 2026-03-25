@@ -39,8 +39,8 @@ async def run():
 
         # Wait for success message or error
         try:
-            # Increased timeout as upload might take time
-            await page.wait_for_selector("text=Registration Complete!", timeout=20000)
+            # Increased timeout as upload might take time and now includes a 30s app timeout
+            await page.wait_for_selector("text=Registration Complete!", timeout=35000)
             print("Registration successful!")
         except Exception as e:
             print(f"Registration failed or success message not found: {e}")
