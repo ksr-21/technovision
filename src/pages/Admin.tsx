@@ -4,9 +4,12 @@ import { motion } from 'motion/react';
 import {
   ChevronLeft, Database, Download, RefreshCw,
   Search, User, Mail, Phone, Building, Calendar,
-  Trophy, CreditCard, Users, BookOpen, LogOut
+  Trophy, CreditCard, Users, BookOpen, LogOut,
+  ExternalLink, Filter
 } from 'lucide-react';
 import { db } from '../firebase';
+import { departments } from '../data/departments';
+import DeveloperCredit from '../components/DeveloperCredit';
 import { collection, query, orderBy, getDocs, Timestamp } from 'firebase/firestore';
 
 interface RegistrationData {
@@ -19,6 +22,7 @@ interface RegistrationData {
   year: string;
   teamName?: string;
   transactionId: string;
+  paymentProofUrl?: string;
   eventId: string;
   eventName: string;
   eventCategory: string;
@@ -30,6 +34,7 @@ export default function Admin() {
   const [registrations, setRegistrations] = useState<RegistrationData[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedEventId, setSelectedEventId] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(false);
@@ -91,15 +96,20 @@ export default function Admin() {
     }
   }, [isAuthenticated]);
 
-  const filteredRegistrations = registrations.filter(reg =>
-    reg.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    reg.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    reg.eventName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    reg.transactionId.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredRegistrations = registrations.filter(reg => {
+    const matchesSearch =
+      reg.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      reg.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      reg.eventName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      reg.transactionId.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesEvent = selectedEventId === '' || reg.eventId === selectedEventId;
+
+    return matchesSearch && matchesEvent;
+  });
 
   const exportToCSV = () => {
-    const headers = ['Full Name', 'Email', 'Phone', 'College', 'Department', 'Year', 'Event', 'Category', 'Team Name', 'Transaction ID', 'Date'];
+    const headers = ['Full Name', 'Email', 'Phone', 'College', 'Department', 'Year', 'Event', 'Category', 'Team Name', 'Transaction ID', 'Payment Proof URL', 'Date'];
 
     // Function to escape and wrap fields in double quotes
     const escapeCSV = (val: string | undefined | null) => {
@@ -119,6 +129,7 @@ export default function Admin() {
       escapeCSV(reg.eventCategory),
       escapeCSV(reg.teamName || 'N/A'),
       escapeCSV(reg.transactionId),
+      escapeCSV(reg.paymentProofUrl || 'N/A'),
       escapeCSV(reg.timestamp?.toDate().toLocaleString() || 'N/A')
     ]);
 
@@ -247,20 +258,40 @@ export default function Admin() {
         </div>
 
         {/* Stats & Search */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="md:col-span-3 relative group">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-8">
+          <div className="md:col-span-5 relative group">
             <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-accent transition-colors">
               <Search size={20} />
             </div>
             <input
               type="text"
-              placeholder="Search by name, email, event or transaction ID..."
+              placeholder="Search by name, email, event or TXN..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-5 pl-16 pr-8 text-white focus:outline-none focus:border-accent/50 transition-all backdrop-blur-xl"
             />
           </div>
-          <div className="bg-zinc-900/50 border border-white/10 rounded-2xl p-6 backdrop-blur-xl flex flex-col justify-center">
+
+          <div className="md:col-span-4 relative group">
+            <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-accent transition-colors">
+              <Filter size={20} />
+            </div>
+            <select
+              value={selectedEventId}
+              onChange={(e) => setSelectedEventId(e.target.value)}
+              className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-5 pl-16 pr-8 text-white focus:outline-none focus:border-accent/50 transition-all backdrop-blur-xl appearance-none"
+            >
+              <option value="">All Competitions</option>
+              {departments.map(dept => (
+                <option key={dept.id} value={dept.id}>{dept.eventName}</option>
+              ))}
+            </select>
+            <div className="absolute inset-y-0 right-6 flex items-center pointer-events-none text-white/20">
+              <ChevronLeft size={16} className="-rotate-90" />
+            </div>
+          </div>
+
+          <div className="md:col-span-3 bg-zinc-900/50 border border-white/10 rounded-2xl p-6 backdrop-blur-xl flex flex-col justify-center">
             <span className="text-[10px] font-mono uppercase tracking-widest text-white/40">Total Registrations</span>
             <span className="text-3xl font-black text-accent">{filteredRegistrations.length}</span>
           </div>
@@ -276,6 +307,7 @@ export default function Admin() {
                   <th className="p-6 text-[10px] font-mono uppercase tracking-widest text-white/40">Academic Details</th>
                   <th className="p-6 text-[10px] font-mono uppercase tracking-widest text-white/40">Event / Team</th>
                   <th className="p-6 text-[10px] font-mono uppercase tracking-widest text-white/40">Payment</th>
+                  <th className="p-6 text-[10px] font-mono uppercase tracking-widest text-white/40">Proof</th>
                   <th className="p-6 text-[10px] font-mono uppercase tracking-widest text-white/40">Timestamp</th>
                 </tr>
               </thead>
@@ -349,9 +381,24 @@ export default function Admin() {
                         <div className="flex flex-col gap-1">
                           <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded w-fit flex items-center gap-2">
                             <CreditCard size={12} />
-                            {reg.transactionId}
+                            {reg.transactionId || 'N/A'}
                           </span>
                         </div>
+                      </td>
+                      <td className="p-6">
+                        {reg.paymentProofUrl ? (
+                          <a
+                            href={reg.paymentProofUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-mono text-accent hover:underline flex items-center gap-1"
+                          >
+                            <ExternalLink size={12} />
+                            VIEW
+                          </a>
+                        ) : (
+                          <span className="text-xs font-mono text-white/20 italic">None</span>
+                        )}
                       </td>
                       <td className="p-6 text-xs text-white/40 font-mono">
                         <div className="flex items-center gap-2">
@@ -365,6 +412,10 @@ export default function Admin() {
               </tbody>
             </table>
           </div>
+        </div>
+
+        <div className="mt-12 flex justify-center border-t border-white/5 pt-12">
+          <DeveloperCredit />
         </div>
       </main>
     </div>
