@@ -54,32 +54,56 @@ export default function Registration() {
     setIsSubmitting(true);
     setError(null);
 
+    const timeout = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('TIMEOUT')), 30000)
+    );
+
     try {
-      let paymentProofUrl = '';
+      const submissionPromise = (async () => {
+        let paymentProofUrl = '';
 
-      if (qrCodeFile && storage) {
-        const storageRef = ref(storage, `payment_proofs/${Date.now()}_${qrCodeFile.name}`);
-        const snapshot = await uploadBytes(storageRef, qrCodeFile);
-        paymentProofUrl = await getDownloadURL(snapshot.ref);
-      }
+        if (qrCodeFile && storage) {
+          console.log("Starting image upload...");
+          const storageRef = ref(storage, `payment_proofs/${Date.now()}_${qrCodeFile.name}`);
+          const snapshot = await uploadBytes(storageRef, qrCodeFile);
+          console.log("Image uploaded successfully.");
+          paymentProofUrl = await getDownloadURL(snapshot.ref);
+          console.log("Download URL obtained:", paymentProofUrl);
+        }
 
-      const registrationData = {
-        ...formData,
-        eventId: selectedDeptId,
-        eventName: selectedDept?.eventName || 'General Registration',
-        eventCategory: selectedDept?.name || 'N/A',
-        paymentProofUrl,
-        timestamp: serverTimestamp(),
-      };
+        const registrationData = {
+          ...formData,
+          eventId: selectedDeptId,
+          eventName: selectedDept?.eventName || 'General Registration',
+          eventCategory: selectedDept?.name || 'N/A',
+          paymentProofUrl,
+          timestamp: serverTimestamp(),
+        };
 
-      if (!db) throw new Error("Database not initialized");
-      await addDoc(collection(db, 'registrations'), registrationData);
+        if (!db) {
+          console.error("Database not initialized");
+          throw new Error("DATABASE_NOT_INITIALIZED");
+        }
+
+        console.log("Saving registration to Firestore...");
+        await addDoc(collection(db, 'registrations'), registrationData);
+        console.log("Registration saved successfully.");
+        return true;
+      })();
+
+      await Promise.race([submissionPromise, timeout]);
 
       setIsSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err) {
-      console.error("Error saving registration: ", err);
-      setError("Failed to submit registration. Please try again.");
+    } catch (err: any) {
+      console.error("Error saving registration:", err);
+      if (err.message === 'TIMEOUT') {
+        setError("The request took too long. Please check your internet connection and try again.");
+      } else if (err.message === 'DATABASE_NOT_INITIALIZED') {
+        setError("System configuration error. Please contact support.");
+      } else {
+        setError("Failed to submit registration. Please check all fields and try again.");
+      }
     } finally {
       setIsSubmitting(false);
     }

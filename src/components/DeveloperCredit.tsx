@@ -8,9 +8,8 @@ export default function DeveloperCredit() {
       <div className="flex items-center gap-3">
         <span>Made by</span>
         <motion.div className="flex items-center gap-4">
-          {/* Update the LinkedIn URL with the correct profile ID when available */}
           <motion.a
-            href="#"
+            href="https://www.linkedin.com/in/kunal-sanjit-singh/"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05, color: '#fff' }}
