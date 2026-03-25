@@ -63,10 +63,22 @@ export default function Registration() {
       const submissionPromise = (async () => {
         let paymentProofUrl = '';
 
-        if (qrCodeFile && storage) {
-          const storageRef = ref(storage, `payment_proofs/${Date.now()}_${qrCodeFile.name}`);
-          const snapshot = await uploadBytes(storageRef, qrCodeFile);
-          paymentProofUrl = await getDownloadURL(snapshot.ref);
+        if (qrCodeFile) {
+          if (!storage) {
+            console.error("Firebase Storage not initialized. Image upload skipped.");
+            throw new Error("STORAGE_UNAVAILABLE");
+          }
+
+          try {
+            console.log(`Starting upload for ${qrCodeFile.name}...`);
+            const storageRef = ref(storage, `payment_proofs/${Date.now()}_${qrCodeFile.name}`);
+            const snapshot = await uploadBytes(storageRef, qrCodeFile);
+            paymentProofUrl = await getDownloadURL(snapshot.ref);
+            console.log("Upload successful. URL:", paymentProofUrl);
+          } catch (uploadErr) {
+            console.error("Error during image upload:", uploadErr);
+            throw new Error("UPLOAD_FAILED");
+          }
         }
 
         const registrationData = {
@@ -93,6 +105,10 @@ export default function Registration() {
       console.error("Error saving registration: ", err);
       if (err.message === 'TIMEOUT') {
         setError("Request timed out. Please check your connection and try again.");
+      } else if (err.message === 'STORAGE_UNAVAILABLE') {
+        setError("Storage service is currently unavailable. Please contact the administrator.");
+      } else if (err.message === 'UPLOAD_FAILED') {
+        setError("Failed to upload payment proof. Please try again or check your internet connection.");
       } else {
         setError("Failed to submit registration. Please try again.");
       }

@@ -18,7 +18,8 @@ const firebaseConfig = {
 const isConfigValid = !!(
   firebaseConfig.apiKey &&
   firebaseConfig.projectId &&
-  firebaseConfig.appId
+  firebaseConfig.appId &&
+  firebaseConfig.storageBucket
 );
 
 // Initialize Firebase
