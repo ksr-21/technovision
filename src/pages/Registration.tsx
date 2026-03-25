@@ -4,12 +4,14 @@ import { motion, AnimatePresence } from 'motion/react';
 import {
   User, Mail, Phone, Building, BookOpen,
   Trophy, ArrowRight, CheckCircle, ChevronLeft,
-  Users, CreditCard, Loader2
+  Users, CreditCard, Loader2, Upload
 } from 'lucide-react';
 import { departments } from '../data/departments';
 import { ThematicBackground } from '../components/ThematicBackground';
-import { db } from '../firebase';
+import { db, storage } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import DeveloperCredit from '../components/DeveloperCredit';
 
 export default function Registration() {
   const { id } = useParams();
@@ -19,6 +21,7 @@ export default function Registration() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [qrCodeFile, setQrCodeFile] = useState<File | null>(null);
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -52,14 +55,24 @@ export default function Registration() {
     setError(null);
 
     try {
+      let paymentProofUrl = '';
+
+      if (qrCodeFile && storage) {
+        const storageRef = ref(storage, `payment_proofs/${Date.now()}_${qrCodeFile.name}`);
+        const snapshot = await uploadBytes(storageRef, qrCodeFile);
+        paymentProofUrl = await getDownloadURL(snapshot.ref);
+      }
+
       const registrationData = {
         ...formData,
         eventId: selectedDeptId,
         eventName: selectedDept?.eventName || 'General Registration',
         eventCategory: selectedDept?.name || 'N/A',
+        paymentProofUrl,
         timestamp: serverTimestamp(),
       };
 
+      if (!db) throw new Error("Database not initialized");
       await addDoc(collection(db, 'registrations'), registrationData);
 
       setIsSubmitted(true);
@@ -350,22 +363,44 @@ export default function Registration() {
                 )}
               </AnimatePresence>
 
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-accent transition-colors">
-                  <CreditCard size={18} />
+              <div className="space-y-4">
+                <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 block ml-4">Upload Payment Screenshot</label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-accent transition-colors">
+                    <Upload size={18} />
+                  </div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    required
+                    onChange={(e) => setQrCodeFile(e.target.files ? e.target.files[0] : null)}
+                    className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-5 pl-16 pr-8 text-white focus:outline-none focus:border-accent/50 transition-all backdrop-blur-xl file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-accent/10 file:text-accent hover:file:bg-accent/20 cursor-pointer"
+                  />
                 </div>
-                <input
-                  type="text"
-                  name="transactionId"
-                  placeholder="TXN123456789"
-                  value={formData.transactionId}
-                  onChange={handleChange}
-                  className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-5 pl-16 pr-8 text-white focus:outline-none focus:border-accent/50 transition-all backdrop-blur-xl"
-                />
+                <p className="text-[9px] text-white/20 ml-4 italic">
+                  * Proof will be securely stored in our encrypted event database for verification.
+                </p>
               </div>
-              <p className="text-[9px] text-white/20 ml-4 italic">
-                * Enter your unique Payment Transaction ID (e.g., UTR, Ref No.) to help us verify your registration.
-              </p>
+
+              <div className="space-y-4">
+                <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 block ml-4">Transaction ID (Optional)</label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-accent transition-colors">
+                    <CreditCard size={18} />
+                  </div>
+                  <input
+                    type="text"
+                    name="transactionId"
+                    placeholder="TXN123456789 (Optional)"
+                    value={formData.transactionId}
+                    onChange={handleChange}
+                    className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-5 pl-16 pr-8 text-white focus:outline-none focus:border-accent/50 transition-all backdrop-blur-xl"
+                  />
+                </div>
+                <p className="text-[9px] text-white/20 ml-4 italic">
+                  * Enter your unique Payment Transaction ID (e.g., UTR, Ref No.) if available.
+                </p>
+              </div>
             </div>
 
             {error && (
@@ -374,7 +409,7 @@ export default function Registration() {
               </div>
             )}
 
-            <div className="md:col-span-2 mt-8">
+            <div className="md:col-span-2 mt-8 flex flex-col gap-12">
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -392,6 +427,10 @@ export default function Registration() {
                   </>
                 )}
               </button>
+
+              <div className="flex justify-center border-t border-white/5 pt-12">
+                <DeveloperCredit />
+              </div>
             </div>
           </form>
         </div>

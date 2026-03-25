@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { Phone, Mail, Trophy, User, ArrowRight } from 'lucide-react';
 import { departments } from '../data/departments';
 import { ThematicBackground } from '../components/ThematicBackground';
+import DeveloperCredit from '../components/DeveloperCredit';
 
 export default function DepartmentDetail() {
   const { id } = useParams();
@@ -114,6 +115,7 @@ export default function DepartmentDetail() {
 
               {/* Decorative Corner */}
               <div className={`absolute bottom-0 right-0 w-64 h-64 bg-gradient-to-tl from-current to-transparent opacity-5 ${dept.textColor} blur-3xl`} />
+
             </motion.div>
 
             {/* Sidebar: Coordinators */}
@@ -175,6 +177,17 @@ export default function DepartmentDetail() {
                   ))}
                 </div>
               </motion.div>
+
+            </div>
+
+            {/* Developer Credit for Mobile/Tablet */}
+            <div className="lg:hidden col-span-1 flex justify-center mt-12">
+              <DeveloperCredit />
+            </div>
+
+            {/* Developer Credit for Desktop Sidebar */}
+            <div className="hidden lg:flex justify-center pt-8">
+              <DeveloperCredit />
             </div>
           </div>
         </div>
