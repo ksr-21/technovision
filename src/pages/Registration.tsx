@@ -55,31 +55,47 @@ export default function Registration() {
     setError(null);
 
     try {
-      let paymentProofUrl = '';
+      // Create a timeout promise
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('TIMEOUT')), 30000)
+      );
 
-      if (qrCodeFile && storage) {
-        const storageRef = ref(storage, `payment_proofs/${Date.now()}_${qrCodeFile.name}`);
-        const snapshot = await uploadBytes(storageRef, qrCodeFile);
-        paymentProofUrl = await getDownloadURL(snapshot.ref);
-      }
+      const submissionPromise = (async () => {
+        let paymentProofUrl = '';
 
-      const registrationData = {
-        ...formData,
-        eventId: selectedDeptId,
-        eventName: selectedDept?.eventName || 'General Registration',
-        eventCategory: selectedDept?.name || 'N/A',
-        paymentProofUrl,
-        timestamp: serverTimestamp(),
-      };
+        if (qrCodeFile && storage) {
+          const storageRef = ref(storage, `payment_proofs/${Date.now()}_${qrCodeFile.name}`);
+          const snapshot = await uploadBytes(storageRef, qrCodeFile);
+          paymentProofUrl = await getDownloadURL(snapshot.ref);
+        }
 
-      if (!db) throw new Error("Database not initialized");
-      await addDoc(collection(db, 'registrations'), registrationData);
+        const registrationData = {
+          ...formData,
+          eventId: selectedDeptId,
+          eventName: selectedDept?.eventName || 'General Registration',
+          eventCategory: selectedDept?.name || 'N/A',
+          paymentProofUrl,
+          timestamp: serverTimestamp(),
+        };
+
+        if (!db) throw new Error("Database not initialized");
+        await addDoc(collection(db, 'registrations'), registrationData);
+
+        return true;
+      })();
+
+      // Race the submission against the timeout
+      await Promise.race([submissionPromise, timeoutPromise]);
 
       setIsSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err) {
+    } catch (err: any) {
       console.error("Error saving registration: ", err);
-      setError("Failed to submit registration. Please try again.");
+      if (err.message === 'TIMEOUT') {
+        setError("Request timed out. Please check your connection and try again.");
+      } else {
+        setError("Failed to submit registration. Please try again.");
+      }
     } finally {
       setIsSubmitting(false);
     }
