@@ -4,13 +4,12 @@ import { motion, AnimatePresence } from 'motion/react';
 import {
   User, Mail, Phone, Building, BookOpen,
   Trophy, ArrowRight, CheckCircle, ChevronLeft,
-  Users, CreditCard, Loader2, Upload
+  Users, CreditCard, Loader2
 } from 'lucide-react';
 import { departments } from '../data/departments';
 import { ThematicBackground } from '../components/ThematicBackground';
-import { db, storage } from '../firebase';
+import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import DeveloperCredit from '../components/DeveloperCredit';
 
 export default function Registration() {
@@ -21,7 +20,6 @@ export default function Registration() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [qrCodeFile, setQrCodeFile] = useState<File | null>(null);
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -61,32 +59,11 @@ export default function Registration() {
       );
 
       const submissionPromise = (async () => {
-        let paymentProofUrl = '';
-
-        if (qrCodeFile) {
-          if (!storage) {
-            console.error("Firebase Storage not initialized. Image upload skipped.");
-            throw new Error("STORAGE_UNAVAILABLE");
-          }
-
-          try {
-            console.log(`Starting upload for ${qrCodeFile.name}...`);
-            const storageRef = ref(storage, `payment_proofs/${Date.now()}_${qrCodeFile.name}`);
-            const snapshot = await uploadBytes(storageRef, qrCodeFile);
-            paymentProofUrl = await getDownloadURL(snapshot.ref);
-            console.log("Upload successful. URL:", paymentProofUrl);
-          } catch (uploadErr) {
-            console.error("Error during image upload:", uploadErr);
-            throw new Error("UPLOAD_FAILED");
-          }
-        }
-
         const registrationData = {
           ...formData,
           eventId: selectedDeptId,
           eventName: selectedDept?.eventName || 'General Registration',
           eventCategory: selectedDept?.name || 'N/A',
-          paymentProofUrl,
           timestamp: serverTimestamp(),
         };
 
@@ -105,10 +82,6 @@ export default function Registration() {
       console.error("Error saving registration: ", err);
       if (err.message === 'TIMEOUT') {
         setError("Request timed out. Please check your connection and try again.");
-      } else if (err.message === 'STORAGE_UNAVAILABLE') {
-        setError("Storage service is currently unavailable. Please contact the administrator.");
-      } else if (err.message === 'UPLOAD_FAILED') {
-        setError("Failed to upload payment proof. Please try again or check your internet connection.");
       } else {
         setError("Failed to submit registration. Please try again.");
       }
@@ -396,26 +369,7 @@ export default function Registration() {
               </AnimatePresence>
 
               <div className="space-y-4">
-                <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 block ml-4">Upload Payment Screenshot</label>
-                <div className="relative group">
-                  <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-accent transition-colors">
-                    <Upload size={18} />
-                  </div>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    required
-                    onChange={(e) => setQrCodeFile(e.target.files ? e.target.files[0] : null)}
-                    className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-5 pl-16 pr-8 text-white focus:outline-none focus:border-accent/50 transition-all backdrop-blur-xl file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-accent/10 file:text-accent hover:file:bg-accent/20 cursor-pointer"
-                  />
-                </div>
-                <p className="text-[9px] text-white/20 ml-4 italic">
-                  * Proof will be securely stored in our encrypted event database for verification.
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 block ml-4">Transaction ID (Optional)</label>
+                <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 block ml-4">Transaction ID (Mandatory)</label>
                 <div className="relative group">
                   <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-white/20 group-focus-within:text-accent transition-colors">
                     <CreditCard size={18} />
@@ -423,14 +377,15 @@ export default function Registration() {
                   <input
                     type="text"
                     name="transactionId"
-                    placeholder="TXN123456789 (Optional)"
+                    placeholder="TXN123456789"
+                    required
                     value={formData.transactionId}
                     onChange={handleChange}
                     className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-5 pl-16 pr-8 text-white focus:outline-none focus:border-accent/50 transition-all backdrop-blur-xl"
                   />
                 </div>
                 <p className="text-[9px] text-white/20 ml-4 italic">
-                  * Enter your unique Payment Transaction ID (e.g., UTR, Ref No.) if available.
+                  * Enter your unique Payment Transaction ID (e.g., UTR, Ref No.) for verification.
                 </p>
               </div>
             </div>
