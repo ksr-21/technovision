@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Phone, Mail, Trophy, User, ArrowRight } from 'lucide-react';
+import { Phone, Mail, Trophy, User, ArrowRight, CheckCircle2, ListTodo } from 'lucide-react';
 import { departments } from '../data/departments';
 import { ThematicBackground } from '../components/ThematicBackground';
 import DeveloperCredit from '../components/DeveloperCredit';
@@ -85,10 +85,80 @@ export default function DepartmentDetail() {
                   transition={{ delay: 0.4 }}
                   className="prose prose-invert max-w-none"
                 >
-                  <p className="text-xl text-gray-400 leading-relaxed font-light first-letter:text-5xl first-letter:font-black first-letter:mr-3 first-letter:float-left first-letter:text-white">
+                  <p className="text-xl text-gray-400 leading-relaxed font-light first-letter:text-5xl first-letter:font-black first-letter:mr-3 first-letter:float-left first-letter:text-white mb-12">
                     {dept.description}
                   </p>
                 </motion.div>
+
+                {dept.rules && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="space-y-8 mb-12"
+                  >
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className={`p-2 rounded-lg ${dept.accentBg} border ${dept.borderColor}`}>
+                        <ListTodo className={dept.textColor} size={20} />
+                      </div>
+                      <h4 className="text-2xl font-bold text-white uppercase tracking-tighter">
+                        Competition Rules
+                      </h4>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-4">
+                      {dept.rules.map((rule, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.6 + (index * 0.1) }}
+                          className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors group/item"
+                        >
+                          <div className="mt-1">
+                            <CheckCircle2 className={`w-5 h-5 ${dept.textColor} opacity-40 group-hover/item:opacity-100 transition-opacity`} />
+                          </div>
+                          <p className="text-gray-300 leading-relaxed">{rule}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                {dept.rounds && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.55 }}
+                    className="space-y-8 mb-12"
+                  >
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className={`p-2 rounded-lg ${dept.accentBg} border ${dept.borderColor}`}>
+                        <Trophy className={dept.textColor} size={20} />
+                      </div>
+                      <h4 className="text-2xl font-bold text-white uppercase tracking-tighter">
+                        Competition Rounds
+                      </h4>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-4">
+                      {dept.rounds.map((round, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.65 + (index * 0.1) }}
+                          className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors group/item"
+                        >
+                          <div className="mt-1">
+                            <CheckCircle2 className={`w-5 h-5 ${dept.textColor} opacity-40 group-hover/item:opacity-100 transition-opacity`} />
+                          </div>
+                          <p className="text-gray-300 leading-relaxed">{round}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
 
                 <div className="mt-16 flex flex-wrap gap-8 items-center border-t border-white/5 pt-12">
                   <div className="flex items-center gap-4 group/item transition-all duration-300 hover:scale-105">

@@ -23,7 +23,7 @@ const leaders = [
     designation: 'HOD AI & DS Engg. Event Co-ordinator',
   },
   {
-    name: 'Dr. B. B. Khapale',
+    name: 'Dr. S. B. Khaple',
     designation: 'HOD Civil Engg. Event Co-ordinator',
   },
 ];
