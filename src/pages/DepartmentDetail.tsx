@@ -250,15 +250,11 @@ export default function DepartmentDetail() {
 
             </div>
 
-            {/* Developer Credit for Mobile/Tablet */}
-            <div className="lg:hidden col-span-1 flex justify-center mt-12">
-              <DeveloperCredit />
-            </div>
+          </div>
 
-            {/* Developer Credit for Desktop Sidebar */}
-            <div className="hidden lg:flex justify-center pt-8">
-              <DeveloperCredit />
-            </div>
+          {/* New Footer Developer Credit */}
+          <div className="mt-24 pt-12 border-t border-white/5 flex justify-center">
+            <DeveloperCredit />
           </div>
         </div>
       </main>

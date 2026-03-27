@@ -95,7 +95,7 @@ export const departments: Department[] = [
     paymentScanner: computerScanner,
     eventName: 'Develop in DARK',
     shortEventDescription: 'Test your creativity, speed, and AI skills in an exciting 3-round Prompting Competition!',
-    eventImage: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800',
+    eventImage: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=800',
     description: "Get ready to test your creativity, speed, and AI skills in an exciting 3-round Prompting Competition!",
     rounds: [
       'Round 1: Scenario to Image - Participants will be given a scenario. Your task is to write an effective prompt to generate the best possible image using AI tools.',
@@ -197,7 +197,7 @@ export const departments: Department[] = [
     paymentScanner: civ1,
     eventName: 'One Shot Knockdown',
     shortEventDescription: 'Knock down a pyramid of steel glasses using a single throw of a rubber ball.',
-    eventImage: 'https://images.unsplash.com/photo-1611510338559-2f463335092c?auto=format&fit=crop&q=80&w=800',
+    eventImage: 'https://images.unsplash.com/photo-1516048015710-7a3b4c86be43?auto=format&fit=crop&q=80&w=800',
     description: 'Participants must knock down a pyramid of steel glasses using a single throw of a rubber ball.',
     rules: [
       'Eligibility: The event is open to all registered college students.',
@@ -278,7 +278,7 @@ export const departments: Department[] = [
     paymentScanner: etcScanner,
     eventName: 'RC Grand Prix',
     shortEventDescription: 'An adrenaline-pumping RC race featuring obstacles and lap challenges.',
-    eventImage: 'https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&q=80&w=800',
+    eventImage: 'https://images.unsplash.com/photo-1594438090270-20590432168e?auto=format&fit=crop&q=80&w=800',
     description: 'The RC Race Competition is an exciting technical event where participants control remote-controlled cars to complete different racing challenges.',
     rounds: [
       'Stage 1: Line Follower Challenge',
@@ -314,7 +314,7 @@ export const departments: Department[] = [
     paymentScanner: mechScanner,
     eventName: 'ROBO SOCCER',
     shortEventDescription: 'Design and control custom robots to compete in a high-stakes soccer tournament.',
-    eventImage: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800',
+    eventImage: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&q=80&w=800',
     description: 'Robo Soccer is an exciting robotics competition where teams design and control robots to play soccer on a mini arena.',
     rules: [
       'Robots must dribble, pass, and push the ball to score goals.',
