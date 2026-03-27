@@ -36,16 +36,32 @@ export default function Admin() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedEventId, setSelectedEventId] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [adminRole, setAdminRole] = useState<string>('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Default fallback to 'admin123' if environment variable is missing
-    const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD || 'admin123';
 
-    if (password === correctPassword) {
+    const passwordMap: Record<string, string> = {
+      [import.meta.env.VITE_ADMIN_PASSWORD_SUPER || 'superadmin123']: 'superadmin',
+      [import.meta.env.VITE_ADMIN_PASSWORD_MBA || 'mba123']: 'mba',
+      [import.meta.env.VITE_ADMIN_PASSWORD_MCA || 'mca123']: 'mca',
+      [import.meta.env.VITE_ADMIN_PASSWORD_COMPUTER || 'computer123']: 'computer',
+      [import.meta.env.VITE_ADMIN_PASSWORD_AIDS || 'aids123']: 'aids',
+      [import.meta.env.VITE_ADMIN_PASSWORD_CIVIL || 'civil123']: 'civil',
+      [import.meta.env.VITE_ADMIN_PASSWORD_CIVIL_KNOCKDOWN || 'civil-knockdown123']: 'civil-knockdown',
+      [import.meta.env.VITE_ADMIN_PASSWORD_CIVIL_QUIZ || 'civil-quiz123']: 'civil-quiz',
+      [import.meta.env.VITE_ADMIN_PASSWORD_ETC || 'etc123']: 'etc',
+      [import.meta.env.VITE_ADMIN_PASSWORD_MECH || 'mech123']: 'mech',
+      [import.meta.env.VITE_ADMIN_PASSWORD_FE || 'fe123']: 'fe',
+    };
+
+    const role = passwordMap[password];
+
+    if (role) {
       setIsAuthenticated(true);
+      setAdminRole(role);
       setLoginError(false);
       fetchRegistrations();
     } else {
@@ -55,7 +71,9 @@ export default function Admin() {
 
   const handleLogout = () => {
     sessionStorage.removeItem('admin_authenticated');
+    sessionStorage.removeItem('admin_role');
     setIsAuthenticated(false);
+    setAdminRole('');
   };
 
   const fetchRegistrations = async () => {
@@ -84,19 +102,27 @@ export default function Admin() {
   useEffect(() => {
     // Check if previously authenticated in this session
     const authStatus = sessionStorage.getItem('admin_authenticated');
-    if (authStatus === 'true') {
+    const storedRole = sessionStorage.getItem('admin_role');
+    if (authStatus === 'true' && storedRole) {
       setIsAuthenticated(true);
+      setAdminRole(storedRole);
       fetchRegistrations();
     }
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && adminRole) {
       sessionStorage.setItem('admin_authenticated', 'true');
+      sessionStorage.setItem('admin_role', adminRole);
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, adminRole]);
 
   const filteredRegistrations = registrations.filter(reg => {
+    // Role based filtering
+    if (adminRole !== 'superadmin' && reg.eventId !== adminRole) {
+      return false;
+    }
+
     const matchesSearch =
       reg.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       reg.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -281,10 +307,18 @@ export default function Admin() {
               onChange={(e) => setSelectedEventId(e.target.value)}
               className="w-full bg-zinc-900/50 border border-white/10 rounded-2xl py-5 pl-16 pr-8 text-white focus:outline-none focus:border-accent/50 transition-all backdrop-blur-xl appearance-none"
             >
-              <option value="">All Competitions</option>
-              {departments.map(dept => (
-                <option key={dept.id} value={dept.id}>{dept.eventName}</option>
-              ))}
+              {adminRole === 'superadmin' ? (
+                <>
+                  <option value="">All Competitions</option>
+                  {departments.map(dept => (
+                    <option key={dept.id} value={dept.id}>{dept.eventName}</option>
+                  ))}
+                </>
+              ) : (
+                <option value={adminRole}>
+                  {departments.find(d => d.id === adminRole)?.eventName || 'Your Competition'}
+                </option>
+              )}
             </select>
             <div className="absolute inset-y-0 right-6 flex items-center pointer-events-none text-white/20">
               <ChevronLeft size={16} className="-rotate-90" />
