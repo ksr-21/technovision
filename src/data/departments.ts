@@ -197,7 +197,7 @@ export const departments: Department[] = [
     paymentScanner: civ1,
     eventName: 'One Shot Knockdown',
     shortEventDescription: 'Knock down a pyramid of steel glasses using a single throw of a rubber ball.',
-    eventImage: 'https://images.unsplash.com/photo-1611510338559-2f463335092c?auto=format&fit=crop&q=80&w=800',
+    eventImage: 'https://imgs.search.brave.com/EtxKUXTydypzW9gUCKl0yoiqCsAM_ZErGfFrPpsG29U/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZi1z/dC5zYy1jZG4ubmV0/L2QvWGplRm5GY2dE/VUxHQWMxQWhiNkdt/LjI1Ni5JUlpYU09Z/P21vPUdrY2FEUm9B/R2dBeUFRUklBbEF1/WUFGYUVFUm1UR0Z5/WjJWVWFIVnRZbTVo/YVd5aUFSQUlnQUlp/Q3hJQUtnZEpVbHBZ/VTA5Wm9nRVFDSm9L/SWdzU0FDb0hTVkph/V0ZOUFdRPT0mdWM9/NDY',
     description: 'Participants must knock down a pyramid of steel glasses using a single throw of a rubber ball.',
     rules: [
       'Eligibility: The event is open to all registered college students.',
@@ -278,7 +278,7 @@ export const departments: Department[] = [
     paymentScanner: etcScanner,
     eventName: 'RC Grand Prix',
     shortEventDescription: 'An adrenaline-pumping RC race featuring obstacles and lap challenges.',
-    eventImage: 'https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&q=80&w=800',
+    eventImage: 'https://imgs.search.brave.com/78u-987LNB3j5OCRvKSPXD7GCZ3LtfbLcodfyvr60Pg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMjIy/NDM0NzQ2OS9waG90/by9ib3dtYW52aWxs/ZS1jYW5hZGEtdmFz/c2Vyc3VsbGl2YW4t/bGV4dXMtcmMtZi1n/dDMtZ3RkLXByby1i/ZW4tYmFybmljb2F0/LWFhcm9uLXRlbGl0/ei0xLXBhdWwuanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPTJf/TzB3UW85TzExbWRo/Q0NGM0FrSlpSUVFf/MGNNQlczdzJxa045/bFpaSjA9',
     description: 'The RC Race Competition is an exciting technical event where participants control remote-controlled cars to complete different racing challenges.',
     rounds: [
       'Stage 1: Line Follower Challenge',
