@@ -6,6 +6,8 @@ import {
 import aidsScanner from '../accets/AIDS129.jpeg';
 import civilScanner from '../accets/civil.jpeg';
 import computerScanner from '../accets/CS50.jpeg';
+import civ1 from '../accets/civ1.png';
+import civ3 from '../accets/civ3.png';
 import etcScanner from '../accets/E&TC.jpeg';
 import mechScanner from '../accets/Mech300.jpeg';
 import mbaScanner from '../accets/MBA50.jpeg';
@@ -56,7 +58,7 @@ export const departments = [
     eventName: 'LoadBearing Bridge contest',
     shortEventDescription: 'Build and test the ultimate popsicle stick bridge for maximum load capacity.',
     eventImage: 'https://images.unsplash.com/photo-1517713982677-4b66332f98de?auto=format&fit=crop&q=80&w=800',
-    description: 'Load bearing bridge using popsicle sticks is a popular educational and competition activity. It helps in understanding basic principles of structural engineering, load distribution, and design efficiency. By using simple materials like wooden popsicle sticks and glue, students can create a small-scale model of a bridge that demonstrates how real bridges support loads and maintain stability. This activity improves creativity, problem-solving ability, and practical knowledge of structural design.',
+    description: 'Load bearing bridge using popsicle sticks is a popular educational and competition activity. Proposed date: 10th April, 2026. Rules: 1) Max 3 members per team. 2) Span: 50-60 cm, Max weight: 500g. 3) Types: Warren, Pratt, Howe, and other truss bridges. 4) Materials: Ice cream sticks, Fevicol. 5) No metal/ready-made/3D printed parts. 6) Pre-built; no modifications after submission. 7) Evaluation: Load-bearing (35%), Efficiency (30%), Design (15%), Aesthetics (10%), Presentation (10%). 8) Disqualification for prohibited materials or exceeding limits.',
     coordinators: {
       faculty: [{ name: 'Mahesh D Anap', phone: '7249530830', email: 'mahesh.anap1988@gmail.com' }],
       students: [
@@ -80,10 +82,10 @@ export const departments = [
     registrationFee: '₹50 per student',
     isTeamEvent: false,
     paymentScanner: computerScanner,
-    eventName: 'Develop in Dark',
-    shortEventDescription: 'Test your syntax knowledge by writing code without compiling or running it.',
-    eventImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800',
-    description: "Develop in Dark is to enhance students' programming and problem-solving skills. In this event, participants were required to write programs for given problems without compiling or running the code, which tested their logical thinking, syntax knowledge, and coding accuracy. Evaluated based on the correctness of logic, syntax accuracy, and expected output of the code. After submission, judges compiled the programs to verify the results.",
+    eventName: 'Develop in DARK',
+    shortEventDescription: 'Test your creativity, speed, and AI skills in an exciting 3-round Prompting Competition!',
+    eventImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800',
+    description: "Get ready to test your creativity, speed, and AI skills in an exciting 3-round Prompting Competition! Round 1 (Scenario to Image): Participants will be given a scenario. Your task is to write an effective prompt to generate the best possible image using AI tools. Round 2 (Rapid Fire): A fast-paced round where you'll be given multiple tasks. You must quickly craft accurate prompts based on each task. Round 3 (Mystery Round): Expect the unexpected! A fun and challenging round designed to test your creativity and adaptability.",
     coordinators: {
       faculty: [{ name: 'Prof Snehal Ralebhat', phone: '8459829088', email: 'snehalralebhat0601@gmail.com' }],
       students: [
@@ -109,7 +111,7 @@ export const departments = [
     paymentScanner: etcScanner,
     eventName: 'RC Grand Prix',
     shortEventDescription: 'An adrenaline-pumping RC race featuring obstacles and lap challenges.',
-    eventImage: 'https://images.unsplash.com/photo-1594859709582-346757136720?auto=format&fit=crop&q=80&w=800',
+    eventImage: 'https://images.unsplash.com/photo-1591702548275-3eba01c24769?auto=format&fit=crop&q=80&w=800',
     description: 'The RC Race Competition is an exciting technical event where participants control remote-controlled cars to complete different racing challenges. The competition is conducted in three stages: Line Follower, Obstacle Race, and the final Lap Race. The overall performance across all stages will determine the winners.',
     coordinators: {
       faculty: [
@@ -139,7 +141,7 @@ export const departments = [
     paymentScanner: mechScanner,
     eventName: 'ROBO SOCCER',
     shortEventDescription: 'Design and control custom robots to compete in a high-stakes soccer tournament.',
-    eventImage: 'https://images.unsplash.com/photo-1531746790731-6c2079ee3f08?auto=format&fit=crop&q=80&w=800',
+    eventImage: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800',
     description: 'Robo Soccer is an exciting robotics competition where teams design and control robots to play soccer on a mini arena. The robots must dribble, pass, and push the ball to score goals against the opponent team. It tests skills in robot design, control systems, and team strategy.',
     coordinators: {
       faculty: [
@@ -233,5 +235,65 @@ export const departments = [
       ]
     },
     bgElements: [Database, Layers, Terminal]
+  },
+  {
+    id: 'civil-knockdown',
+    name: 'Civil',
+    fullName: 'Civil Engineering',
+    icon: Building,
+    color: 'orange',
+    theme: 'from-orange-500/20 to-amber-500/20',
+    borderColor: 'border-orange-500/30',
+    textColor: 'text-orange-400',
+    accentColor: 'orange',
+    accentBg: 'bg-orange-500/10',
+    registrationFee: '₹30 per student',
+    isTeamEvent: false,
+    paymentScanner: civ1,
+    eventName: 'One Shot Knockdown',
+    shortEventDescription: 'Knock down a pyramid of steel glasses using a single throw of a rubber ball.',
+    eventImage: 'https://images.unsplash.com/photo-1616091093714-c64882e9ab55?auto=format&fit=crop&q=80&w=800',
+    description: 'Participants must knock down a pyramid of steel glasses using a single throw of a rubber ball. Rules: 1. Eligibility: Open to all registered college students. 2. Objective: Knock down all glasses in a pyramid using a single throw. 3. Attempt Rule: Three chances per round. 4. Throwing Line: Stand behind the marked line. 5. Throw Type: Only overarm throwing. 6. Scoring: Full pyramid knockdown = Winner. 7. Equipment: Only provided rubber ball. 8. Fair Play: Misconduct leads to disqualification. 9. Safety: Follow instructions. 10. Decision: Final and binding.',
+    coordinators: {
+      faculty: [
+        { name: 'Prof. Patil A. B.', phone: '9503711944', email: 'akshayucoer@gmail.com' },
+        { name: 'Prof. N. C. Lokhande', phone: '7038213197', email: 'lokhandenikita2018@gmail.com' }
+      ],
+      students: [
+        { name: 'Pratik Chavan', phone: '7775937958', email: 'pratikc@gmail.com' },
+        { name: 'Vinay Gaonkar', phone: '9307362417', email: 'Gaonkarvinay123@gmail.com' }
+      ]
+    },
+    bgElements: [Ruler, HardHat, Building]
+  },
+  {
+    id: 'civil-quiz',
+    name: 'Civil',
+    fullName: 'Civil Engineering',
+    icon: Building,
+    color: 'orange',
+    theme: 'from-orange-500/20 to-amber-500/20',
+    borderColor: 'border-orange-500/30',
+    textColor: 'text-orange-400',
+    accentColor: 'orange',
+    accentBg: 'bg-orange-500/10',
+    registrationFee: '₹50 per student',
+    isTeamEvent: false,
+    paymentScanner: civ3,
+    eventName: 'Quiz competition',
+    shortEventDescription: 'Test your technical knowledge and compete with the best in this exciting quiz.',
+    eventImage: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=800',
+    description: 'Test your knowledge, challenge your mind, and compete with the best! Rules: 1) Total 30 Technical questions. 2) Correct answer +1 marks. 3) Wrong answer -0.5 marks. 4) Priority to first buzzer. 5) Tie up: 5 additional questions. 6) Reporting time: 10 am. 7) Entry fees: Rs.50.',
+    coordinators: {
+      faculty: [
+        { name: 'Nimbekar A.P.', phone: '7843025371', email: 'abhishek.nimbekar@gmail.com' },
+        { name: 'Wayal P. V.', phone: '8805488865', email: 'pravinwayal@gmail.com' }
+      ],
+      students: [
+        { name: 'Smit Gadhe', phone: '9699122880', email: 'smitmg.g10@gmail.com' },
+        { name: 'Vaibhav Kale', phone: '8956827589', email: 'Smitg2005@gmail.com' }
+      ]
+    },
+    bgElements: [Ruler, HardHat, Building]
   },
 ];
