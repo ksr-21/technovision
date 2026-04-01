@@ -13,6 +13,7 @@ export interface Department {
   registrationFee: string | null;
   isTeamEvent: boolean;
   paymentScanner?: string;
+  externalRegistrationUrl?: string;
   eventName: string;
   shortEventDescription: string;
   eventImage: string;
