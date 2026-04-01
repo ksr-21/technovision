@@ -276,15 +276,15 @@ export const departments: Department[] = [
     registrationFee: '₹400 per team',
     isTeamEvent: true,
     paymentScanner: etcScanner,
+    externalRegistrationUrl: 'https://rcgp.netlify.app/#',
     eventName: 'RC Grand Prix',
-    shortEventDescription: 'An adrenaline-pumping RC race featuring obstacles and lap challenges.',
+    shortEventDescription: '3 Thrilling Formats: Lap Race, Drag Race & Obstacle Avoidance Race.',
     eventImage: 'https://imgs.search.brave.com/78u-987LNB3j5OCRvKSPXD7GCZ3LtfbLcodfyvr60Pg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMjIy/NDM0NzQ2OS9waG90/by9ib3dtYW52aWxs/ZS1jYW5hZGEtdmFz/c2Vyc3VsbGl2YW4t/bGV4dXMtcmMtZi1n/dDMtZ3RkLXByby1i/ZW4tYmFybmljb2F0/LWFhcm9uLXRlbGl0/ei0xLXBhdWwuanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPTJf/TzB3UW85TzExbWRo/Q0NGM0FrSlpSUVFf/MGNNQlczdzJxa045/bFpaSjA9',
-    description: 'The RC Race Competition is an exciting technical event where participants control remote-controlled cars to complete different racing challenges.',
+    description: 'Get ready for the ultimate RC car battle where speed, control, and intelligence decide the winner! 3 thrilling formats: Lap Race, Drag Race, and Obstacle Avoidance Race. Date: 10th April 2026. Venue: C-Building, JSPM Narhe Technical Campus, Narhe, Pune - 411041. Prize Pool: ₹30,000 + Certificates.',
     rounds: [
-      'Stage 1: Line Follower Challenge',
-      'Stage 2: Obstacle Race',
-      'Stage 3: Final Lap Race',
-      'Overall performance across all stages determines the winners.'
+      '1️⃣ Lap Race – Pure speed and racing skills 🏁',
+      '2️⃣ Drag Race – Straight-line power challenge ⚡',
+      '3️⃣ Obstacle Avoidance Race – Precision, control & smart navigation 🧠🚧'
     ],
     coordinators: {
       faculty: [
@@ -292,8 +292,9 @@ export const departments: Department[] = [
         { name: 'Mr. G. M. Kale', phone: '9689258728', email: 'ganraj.m.kale@gmail.com' }
       ],
       students: [
-        { name: 'Yash Waghmare', phone: '9146632088', email: 'Yashwagh0903@gmail.com' },
-        { name: 'Shekhar Ghanghav', phone: '8554026963', email: 'Shekharghanghav2@gmail.com' }
+        { name: 'Yash Waghmare', phone: '91466632088', email: '' },
+        { name: 'Yash shinde', phone: '7559335186', email: '' },
+        { name: 'Tarun naik', phone: '9373655545', email: '' }
       ]
     },
     bgElements: [Zap, Cpu, Network]

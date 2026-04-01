@@ -40,6 +40,12 @@ export default function Registration() {
     }
   }, [id]);
 
+  useEffect(() => {
+    if (selectedDept?.externalRegistrationUrl) {
+      window.location.href = selectedDept.externalRegistrationUrl;
+    }
+  }, [selectedDept]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData(prev => ({
       ...prev,

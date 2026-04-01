@@ -70,13 +70,25 @@ export default function DepartmentDetail() {
                   transition={{ delay: 0.35 }}
                   className="mb-10"
                 >
-                  <Link
-                    to={`/register/${dept.id}`}
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-accent text-white font-bold rounded-2xl hover:bg-white hover:text-black transition-all duration-500 shadow-xl shadow-accent/20 group"
-                  >
-                    REGISTER FOR THIS EVENT
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  {dept.externalRegistrationUrl ? (
+                    <a
+                      href={dept.externalRegistrationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 px-8 py-4 bg-accent text-white font-bold rounded-2xl hover:bg-white hover:text-black transition-all duration-500 shadow-xl shadow-accent/20 group"
+                    >
+                      REGISTER FOR THIS EVENT
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  ) : (
+                    <Link
+                      to={`/register/${dept.id}`}
+                      className="inline-flex items-center gap-3 px-8 py-4 bg-accent text-white font-bold rounded-2xl hover:bg-white hover:text-black transition-all duration-500 shadow-xl shadow-accent/20 group"
+                    >
+                      REGISTER FOR THIS EVENT
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  )}
                 </motion.div>
 
                 <motion.div 
